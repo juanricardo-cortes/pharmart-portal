@@ -23,11 +23,13 @@ export class AddInventoryItemComponent {
   }
 
   initItem() {
+    const emptyBlob = new Blob([], { type: 'application/octet-stream' });
+    const emptyFile = new File([emptyBlob], 'empty.txt', { type: 'text/plain' });
     return {
       name: '',
       description: '',
       price: 0,
-      image: '',
+      image: emptyFile,
       quantity: 0
     };
   }
