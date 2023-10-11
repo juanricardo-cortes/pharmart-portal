@@ -1,0 +1,25 @@
+.card-size {
+  max-width: 400px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: large;
+}
+
+.card-header {
+
+}
+
+.card-content {
+  max-height: 80px;
+  font-size: small;
+}
+
+.card-actions {
+
+}
+
+.card-image {
+
+}

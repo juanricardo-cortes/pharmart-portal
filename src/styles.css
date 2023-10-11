@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.page-margin {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.page-container {
+  width: 100%;
+}
+
+.button-container {
+  padding-bottom: 16px;
+}
+
+.accent-color {
+  background-color: #03dac5 !important
+}
+
+.warn-color {
+  background-color: #b00020 !important;
+}
+
+.primary-color {
+  background-color: #6200ee  !important;
+}

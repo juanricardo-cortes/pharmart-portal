@@ -1,0 +1,49 @@
+<h1 class="primary-color" mat-dialog-title></h1>
+<h1 mat-dialog-title>Add New Item</h1>
+<div class="page-margin">
+  <div mat-dialog-content>
+    <p>
+      <mat-form-field appearance="fill" class="one-third-of-viewport">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="itemRequest.name">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill" class="one-third-of-viewport">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="itemRequest.description">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill" class="one-third-of-viewport">
+        <mat-label>Image</mat-label>
+        <input matInput [(ngModel)]="itemRequest.image">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill" class="one-third-of-viewport">
+        <mat-label>Quantity</mat-label>
+        <input matInput [(ngModel)]="itemRequest.quantity">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill" class="one-third-of-viewport">
+        <mat-label>Price</mat-label>
+        <input matInput [(ngModel)]="itemRequest.price">
+      </mat-form-field>
+    </p>
+  </div>
+  <mat-dialog-actions align="end">
+    <div class="button-container">
+      <button mat-raised-button mat-dialog-close>
+        Cancel
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-raised-button mat-dialog-close class="accent-color" (click)="addItem()">
+        Add
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>
+
