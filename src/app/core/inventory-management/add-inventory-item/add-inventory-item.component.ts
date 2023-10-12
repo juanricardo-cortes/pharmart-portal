@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, HostListener } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
 import { Item } from 'src/app/shared/interfaces/Item';
 import { ItemRequest } from 'src/app/shared/interfaces/requests/itemRequest';
 import { DataSharingService } from 'src/app/shared/services/data-sharing.service';
-import { InventoryManagementService } from 'src/app/shared/services/inventory-management/inventory-management.service';
+import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 
 @Component({
   selector: 'app-add-inventory-item',
@@ -15,8 +14,9 @@ export class AddInventoryItemComponent {
 
   item?: Item;
   itemRequest: ItemRequest;
+  imageName: string = "No file chosen.";
 
-  constructor(private inventoryManagementService: InventoryManagementService,
+  constructor(private itemManagementService: ItemManagementService,
     private dataSharingService: DataSharingService,
     public dialog: MatDialogRef<AddInventoryItemComponent>) {
     this.itemRequest = this.initItem();
@@ -35,12 +35,61 @@ export class AddInventoryItemComponent {
   }
 
   addItem() {
-    this.inventoryManagementService.postData(this.itemRequest).subscribe(
+    const formData = new FormData();
+    formData.append('name', this.itemRequest.name);
+    formData.append('description', this.itemRequest.description);
+    formData.append('price', this.itemRequest.price.toString());
+    formData.append('quantity', this.itemRequest.quantity.toString());
+    formData.append('image', this.itemRequest.image);
+
+    console.log(formData);
+    
+    this.itemManagementService.postData(formData).subscribe(
       (response) => {
         this.dataSharingService.shareItem(response as Item);
         this.dialog.close(response);
       }
     );
+  }
+
+  handleDroppedFiles(files: FileList) {
+    if (files.length > 0) {
+      this.imageName = files[0].name;
+      this.itemRequest.image = files[0];
+    }
+  }
+
+  @HostListener("dragover", ["$event"])
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'copy';
+    }
+  }
+
+  @HostListener("dragleave", ["$event"])
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  @HostListener("drop", ["$event"])
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.dataTransfer && event.dataTransfer.files) {
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        this.handleDroppedFiles(files);
+      }
+    }
+  }
+
+  onFileSelected(event: any) {
+    const files = event.target.files;
+    this.handleDroppedFiles(files);
   }
 }
 
