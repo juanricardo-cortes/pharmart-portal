@@ -14,6 +14,7 @@ import { DataSharingService } from 'src/app/shared/services/data-sharing.service
 
 export class InventoryTableComponent implements OnInit {
 
+
   dataSource = new MatTableDataSource<Item>();
   displayedColumns: string[];
 
@@ -21,6 +22,7 @@ export class InventoryTableComponent implements OnInit {
     private dialogService: DialogContentService,
     private dataSharingService: DataSharingService) {
     this.displayedColumns = this.getColumns().map(c => c.columnDef);
+    this.displayedColumns.push('actions');
   }
 
   ngOnInit() {
@@ -64,5 +66,15 @@ export class InventoryTableComponent implements OnInit {
 
   openAddDataDialog() {
     this.dialogService.openDialog(AddInventoryItemComponent);
+  }
+
+  editItem(row: any) {
+    // Implement the edit logic here for the item with the given ID
+    console.log(row);
+  }
+
+  deleteItem(row: any) {
+    // Implement the delete logic here for the item with the given ID
+    console.log(row);
   }
 }

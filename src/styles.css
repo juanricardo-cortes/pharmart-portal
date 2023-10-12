@@ -19,14 +19,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-bottom: 16px;
 }
 
-.accent-color {
-  background-color: #03dac5 !important
+.orange-bg {
+  background-color: #f9aa33 !important
 }
 
-.warn-color {
-  background-color: #b00020 !important;
+.red-bg {
+  background-color: #e71d36 !important;
 }
 
-.primary-color {
-  background-color: #6200ee  !important;
+.dark-grey-bg {
+  background-color: #202123  !important;
+}
+
+.light-grey-bg {
+  background-color: #444654 !important;
+}
+
+.grey-bg {
+  background-color: #353541 !important;
+}
+
+.green-bg {
+  background-color: #1eb980 !important;
+}
+
+.white-text {
+  color: white !important;
+}
+
+.orange-text {
+  color: #f9aa33 !important
+}
+
+.red-text {
+  color: #e71d36 !important;
 }

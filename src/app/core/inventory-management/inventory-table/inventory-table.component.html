@@ -1,21 +1,27 @@
 <div class="page-margin">
-  <div class="button-container">
-    <button mat-raised-button (click)="openAddDataDialog()" class="accent-color">
-      Add Item
+  <div class="fixed-button">
+    <button mat-fab (click)="openAddDataDialog()" class="green-bg">
       <mat-icon>add</mat-icon>
     </button>
   </div>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 grey-bg">
       <ng-container *ngFor="let column of getColumns()" [matColumnDef]="column.columnDef">
-        <th mat-header-cell *matHeaderCellDef>
-          {{column.header}}
-        </th>
-        <td mat-cell *matCellDef="let row">
-          {{column.cell(row)}}
-        </td>
+        <th class="white-text" mat-header-cell *matHeaderCellDef>{{column.header}}</th>
+        <td class="white-text" mat-cell *matCellDef="let row">{{column.cell(row)}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="actions">
+        <th class="white-text" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="white-text" mat-cell *matCellDef="let row">
+          <button class="orange-text" mat-icon-button (click)="editItem(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="red-text" mat-icon-button (click)="deleteItem(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

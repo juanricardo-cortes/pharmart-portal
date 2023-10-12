@@ -1,5 +1,6 @@
 .card-size {
   max-width: 400px;
+  height: 450px;
 }
 
 .card-title {
@@ -8,18 +9,18 @@
 }
 
 .card-header {
-
+  height: 17%;
 }
 
 .card-content {
-  max-height: 80px;
+  height: 20%;
   font-size: small;
 }
 
 .card-actions {
-
+  height: 13%;
 }
 
 .card-image {
-
+  height: 50%;
 }
