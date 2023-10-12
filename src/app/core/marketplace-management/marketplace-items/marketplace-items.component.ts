@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Item } from 'src/app/shared/interfaces/Item';
-import { MarketplaceItemsService } from 'src/app/shared/services/marketplace-management/marketplace-items/marketplace-items.service';
+import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 
 @Component({
   selector: 'app-marketplace-items',
@@ -12,16 +12,14 @@ export class MarketplaceItemsComponent implements OnInit {
   items?: Item[];
   cols: number = 1;
 
-  constructor(private marketplaceItemService: MarketplaceItemsService) {}
+  constructor(private itemManagementService: ItemManagementService) {}
 
   ngOnInit() {
     this.updateCols();
-    this.marketplaceItemService.getData().subscribe(
+    this.itemManagementService.getData().subscribe(
       (response) => {
+        console.log(response);
         this.items = response;
-      },
-      (error) => {
-        console.error(error);
       }
     );
   }

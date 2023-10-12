@@ -20,7 +20,6 @@ import { DashboardManagementComponent } from './core/dashboard-management/dashbo
 import { MarketplaceManagementComponent } from './core/marketplace-management/marketplace-management.component';
 import { MarketplaceItemsComponent } from './core/marketplace-management/marketplace-items/marketplace-items.component';
 
-import { MarketplaceItemsService } from './shared/services/marketplace-management/marketplace-items/marketplace-items.service';
 import { HttpClientModule } from '@angular/common/http';
 import { InventoryManagementComponent } from './core/inventory-management/inventory-management.component';
 import { InventoryTableComponent } from './core/inventory-management/inventory-table/inventory-table.component';
@@ -29,6 +28,7 @@ import { DialogContentService } from './shared/services/dialog-content/dialog-co
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { DataSharingService } from './shared/services/data-sharing.service';
+import { ItemManagementService } from './shared/services/item-management/item-management.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { DataSharingService } from './shared/services/data-sharing.service';
     HttpClientModule
   ],
   providers: [
-    MarketplaceItemsService,
+    ItemManagementService,
     DialogContentService,
     DataSharingService
   ],
