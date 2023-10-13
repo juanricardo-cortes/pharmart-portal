@@ -1,35 +1,32 @@
-<h1 class="grey-bg white-text" mat-dialog-title>Add New Item</h1>
+<h1 class="grey-bg white-text" mat-dialog-title>Update {{item.name}}</h1>
 <div class="page-margin">
-  <form #addItemForm="ngForm" enctype="multipart/form-data" (ngSubmit)="addItem()">
+  <form #updateItemForm="ngForm" enctype="multipart/form-data" (ngSubmit)="updateItem()">
     <div mat-dialog-content>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
-          <mat-label>Name</mat-label>
-          <input matInput name="name" [(ngModel)]="itemRequest.name">
+          <mat-label>Name (disabled)</mat-label>
+          <input matInput disabled name="name" [(ngModel)]="item.name">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
           <mat-label>Description</mat-label>
-          <input matInput name="description" [(ngModel)]="itemRequest.description">
+          <input matInput name="description" [(ngModel)]="item.description">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
           <mat-label>Quantity</mat-label>
-          <input matInput name="quantity" [(ngModel)]="itemRequest.quantity">
+          <input matInput name="quantity" [(ngModel)]="item.quantity">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
           <mat-label>Price</mat-label>
-          <input matInput name="price" [(ngModel)]="itemRequest.price">
+          <input matInput name="price" [(ngModel)]="item.price">
         </mat-form-field>
       </p>
-      <div class="drop-area" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-        <p>Drag and drop an image here, or click to select one.</p>
-        <p>{{imageName}}</p>
-      </div>
+      <img class="one-third-of-viewport" mat-card-image [src]="item.image">
     </div>
     <mat-dialog-actions align="end">
       <div class="button-container">
@@ -37,9 +34,9 @@
           Cancel
           <mat-icon>close</mat-icon>
         </button>
-        <button mat-raised-button mat-dialog-close class="green-bg white-text" type="submit">
-          Add
-          <mat-icon>add</mat-icon>
+        <button mat-raised-button mat-dialog-close class="orange-bg white-text" type="submit">
+          Update
+          <mat-icon>edit</mat-icon>
         </button>
       </div>
     </mat-dialog-actions>

@@ -1,12 +1,6 @@
-.one-third-of-viewport {
-  width: 33.33vw; /* Set the width to one-third of the viewport width */
-}
-
 .drop-area {
   border: 2px dashed #ccc;
   padding: 20px;
   text-align: center;
   cursor: pointer;
 }
-
-/* Hide the input initially */

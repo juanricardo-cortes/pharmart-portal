@@ -29,7 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { DataSharingService } from './shared/services/data-sharing.service';
 import { ItemManagementService } from './shared/services/item-management/item-management.service';
-import { InventoryTableActionsComponent } from './core/inventory-management/inventory-table/inventory-table-actions/inventory-table-actions/inventory-table-actions.component';
+import { DeleteInventoryItemComponent } from './core/inventory-management/delete-inventory-item/delete-inventory-item.component';
+import { UpdateInventoryItemComponent } from './core/inventory-management/update-inventory-item/update-inventory-item.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { InventoryTableActionsComponent } from './core/inventory-management/inve
     InventoryManagementComponent,
     InventoryTableComponent,
     AddInventoryItemComponent,
-    InventoryTableActionsComponent
+    DeleteInventoryItemComponent,
+    UpdateInventoryItemComponent
   ],
   imports: [
     BrowserModule,

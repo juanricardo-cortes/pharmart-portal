@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DialogContentService } from 'src/app/shared/services/dialog-content/dialog-content.service';
+import { AddInventoryItemComponent } from './add-inventory-item/add-inventory-item.component';
 
 @Component({
   selector: 'app-inventory-management',
@@ -7,5 +9,11 @@ import { Component } from '@angular/core';
 })
 
 export class InventoryManagementComponent {
+  constructor(private dialogService: DialogContentService) {
 
+  }
+  
+  openAddDataDialog() {
+    this.dialogService.openDialog(AddInventoryItemComponent);
+  }
 }

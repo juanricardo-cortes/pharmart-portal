@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; // Import the map operator
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Constants } from '../../constants/constants';
+import { UpdateItemRequest } from '../../interfaces/requests/itemRequest';
 import { Item } from 'src/app/shared/interfaces/Item';
 
 @Injectable({
@@ -9,30 +10,54 @@ import { Item } from 'src/app/shared/interfaces/Item';
 })
 export class ItemManagementService {
 
-  private getUrl = 'http://localhost:3000/api';
+  private constants: Constants;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.constants = new Constants();
 
-  // getData(): Observable<Item[]> {
-  //   return this.http.get<Item[]>(`${this.getUrl}/items`).pipe(
-  //     map(items => {
-  //       return items.map(item => {
-  //         const blob = new Blob([item.image], { type: 'image/png' });
-  //         const blobUrl = URL.createObjectURL(blob);
-  //         return {
-  //           ...item,
-  //           image: blobUrl
-  //         };
-  //       });
-  //     })
-  //   );
-  // }
-  
-  getData(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.getUrl}/items`);
+  }
+
+  private itemListSubject = new BehaviorSubject<Item[]>([]);
+  itemList$: Observable<Item[]> = this.itemListSubject.asObservable();
+
+  fetchData() {
+    this.http.get<Item[]>(`${this.constants.apiUrl}/items`).subscribe(data => {
+      this.itemListSubject.next(data);
+    });
   }
 
   postData(item: FormData) {
-    return this.http.post(`${this.getUrl}/items`, item);
+    this.http.post<Item>(`${this.constants.apiUrl}/items`, item).subscribe(
+      (response) => {
+        var newItem = response as Item;
+        const currentList = this.itemListSubject.value.slice();
+        currentList.push(newItem);
+        this.itemListSubject.next(currentList);
+      });
+  }
+
+  deleteData(id: string) {
+    this.http.delete<Item>(`${this.constants.apiUrl}/items/${id}`).subscribe(
+      () => {
+        const currentList = this.itemListSubject.value.slice();
+        const index = currentList.findIndex(item => item._id === id);
+        if (index >= 0) {
+          currentList.splice(index, 1);
+          this.itemListSubject.next(currentList);
+        }
+    });
+  }
+
+  updateData(item: UpdateItemRequest) {
+    this.http.put<Item>(`${this.constants.apiUrl}/items`, item).subscribe(
+      (response) => {
+        var newItem = response as Item;
+        const currentList = this.itemListSubject.value.slice();
+        const index = currentList.findIndex(item => item._id === newItem._id);
+        if (index >= 0) {
+          currentList[index] = newItem;
+          this.itemListSubject.next(currentList);
+        }
+    })
   }
 }

@@ -16,12 +16,9 @@ export class MarketplaceItemsComponent implements OnInit {
 
   ngOnInit() {
     this.updateCols();
-    this.itemManagementService.getData().subscribe(
-      (response) => {
-        console.log(response);
-        this.items = response;
-      }
-    );
+    this.itemManagementService.itemList$.subscribe(data => {
+      this.items = data;
+    });
   }
 
   @HostListener('window:resize', ['$event'])

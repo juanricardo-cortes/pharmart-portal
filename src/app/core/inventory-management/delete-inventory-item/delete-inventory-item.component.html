@@ -1,0 +1,18 @@
+<div class="one-third-of-viewport">
+  <h1 class="grey-bg white-text" mat-dialog-title>Confirm delete item</h1>
+  <div class="page-margin">
+    <p>Are you sure you want to delete <b class="red-text">{{item.name}}</b></p>
+    <mat-dialog-actions align="end">
+      <div class="button-container">
+        <button mat-stroked-button mat-dialog-close>
+          Cancel
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-raised-button mat-dialog-close class="red-bg white-text" (click)="deleteItem()">
+          Delete
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-dialog-actions>
+  </div>
+</div>

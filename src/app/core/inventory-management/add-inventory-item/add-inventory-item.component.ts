@@ -1,8 +1,7 @@
 import { Component, HostBinding, HostListener } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Item } from 'src/app/shared/interfaces/Item';
-import { ItemRequest } from 'src/app/shared/interfaces/requests/itemRequest';
-import { DataSharingService } from 'src/app/shared/services/data-sharing.service';
+import { AddItemRequest } from 'src/app/shared/interfaces/requests/itemRequest';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 
 @Component({
@@ -13,12 +12,10 @@ import { ItemManagementService } from 'src/app/shared/services/item-management/i
 export class AddInventoryItemComponent {
 
   item?: Item;
-  itemRequest: ItemRequest;
+  itemRequest: AddItemRequest;
   imageName: string = "No file chosen.";
 
-  constructor(private itemManagementService: ItemManagementService,
-    private dataSharingService: DataSharingService,
-    public dialog: MatDialogRef<AddInventoryItemComponent>) {
+  constructor(private itemManagementService: ItemManagementService) {
     this.itemRequest = this.initItem();
   }
 
@@ -43,13 +40,8 @@ export class AddInventoryItemComponent {
     formData.append('image', this.itemRequest.image);
 
     console.log(formData);
-    
-    this.itemManagementService.postData(formData).subscribe(
-      (response) => {
-        this.dataSharingService.shareItem(response as Item);
-        this.dialog.close(response);
-      }
-    );
+
+    this.itemManagementService.postData(formData);
   }
 
   handleDroppedFiles(files: FileList) {

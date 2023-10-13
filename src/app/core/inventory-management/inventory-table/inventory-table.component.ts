@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Item } from 'src/app/shared/interfaces/Item';
-import { AddInventoryItemComponent } from '../add-inventory-item/add-inventory-item.component';
 import { DialogContentService } from 'src/app/shared/services/dialog-content/dialog-content.service';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
-import { DataSharingService } from 'src/app/shared/services/data-sharing.service';
+import { DeleteInventoryItemComponent } from '../delete-inventory-item/delete-inventory-item.component';
+import { UpdateInventoryItemComponent } from '../update-inventory-item/update-inventory-item.component';
 
 @Component({
   selector: 'app-inventory-table',
@@ -19,22 +19,14 @@ export class InventoryTableComponent implements OnInit {
   displayedColumns: string[];
 
   constructor(private itemManagementService: ItemManagementService,
-    private dialogService: DialogContentService,
-    private dataSharingService: DataSharingService) {
+    private dialogService: DialogContentService) {
     this.displayedColumns = this.getColumns().map(c => c.columnDef);
     this.displayedColumns.push('actions');
   }
 
   ngOnInit() {
-    this.itemManagementService.getData().subscribe(
-      (response) => {
-        this.dataSource.data = response;
-      }
-    );
-
-    this.dataSharingService.item$.subscribe((item) => {
-      console.log(item);
-      this.dataSource.data.push(item);
+    this.itemManagementService.itemList$.subscribe(data => {
+      this.dataSource.data = data;
       this.dataSource.data = [...this.dataSource.data];
     });
   }
@@ -64,17 +56,15 @@ export class InventoryTableComponent implements OnInit {
     ];
   }
 
-  openAddDataDialog() {
-    this.dialogService.openDialog(AddInventoryItemComponent);
+  openDeleteItemDialog(data: any) {
+    this.dialogService.openDialog(DeleteInventoryItemComponent, {
+      data: data
+    });
   }
 
-  editItem(row: any) {
-    // Implement the edit logic here for the item with the given ID
-    console.log(row);
-  }
-
-  deleteItem(row: any) {
-    // Implement the delete logic here for the item with the given ID
-    console.log(row);
+  openUpdateItemDialog(data: any) {
+    this.dialogService.openDialog(UpdateInventoryItemComponent, {
+      data: data
+    });
   }
 }

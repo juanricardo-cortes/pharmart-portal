@@ -54,3 +54,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .red-text {
   color: #e71d36 !important;
 }
+
+.one-third-of-viewport {
+  width: 33.33vw;
+}

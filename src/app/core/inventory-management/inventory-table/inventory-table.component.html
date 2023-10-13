@@ -1,9 +1,5 @@
 <div class="page-margin">
-  <div class="fixed-button">
-    <button mat-fab (click)="openAddDataDialog()" class="green-bg">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 grey-bg">
       <ng-container *ngFor="let column of getColumns()" [matColumnDef]="column.columnDef">
@@ -14,10 +10,10 @@
       <ng-container matColumnDef="actions">
         <th class="white-text" mat-header-cell *matHeaderCellDef>Actions</th>
         <td class="white-text" mat-cell *matCellDef="let row">
-          <button class="orange-text" mat-icon-button (click)="editItem(row)">
+          <button class="orange-text" mat-icon-button (click)="openUpdateItemDialog(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="red-text" mat-icon-button (click)="deleteItem(row)">
+          <button class="red-text" mat-icon-button (click)="openDeleteItemDialog(row)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
