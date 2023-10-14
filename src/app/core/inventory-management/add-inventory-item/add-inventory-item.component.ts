@@ -1,6 +1,6 @@
 import { Component, HostBinding, HostListener } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Item } from 'src/app/shared/interfaces/Item';
+import { Item } from 'src/app/shared/interfaces/item';
 import { AddItemRequest } from 'src/app/shared/interfaces/requests/itemRequest';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 

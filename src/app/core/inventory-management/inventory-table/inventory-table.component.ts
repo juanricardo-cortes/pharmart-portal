@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Item } from 'src/app/shared/interfaces/Item';
+import { Item } from 'src/app/shared/interfaces/item';
 import { DialogContentService } from 'src/app/shared/services/dialog-content/dialog-content.service';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 import { DeleteInventoryItemComponent } from '../delete-inventory-item/delete-inventory-item.component';

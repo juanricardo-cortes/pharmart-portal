@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../../constants/constants';
 import { UpdateItemRequest } from '../../interfaces/requests/itemRequest';
-import { Item } from 'src/app/shared/interfaces/Item';
+import { Item } from 'src/app/shared/interfaces/item';
 
 @Injectable({
   providedIn: 'root'

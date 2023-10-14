@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Item } from 'src/app/shared/interfaces/Item';
+import { Item } from 'src/app/shared/interfaces/item';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 
 @Component({

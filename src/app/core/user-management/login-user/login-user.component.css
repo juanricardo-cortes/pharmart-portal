@@ -1,0 +1,44 @@
+.card-size {
+  width: 450px;
+  height: 450px;
+}
+
+.card-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: large;
+}
+
+.card-header {
+  height: 20%;
+}
+
+.card-content {
+  height: 60%;
+  font-size: medium;
+}
+
+.card-actions {
+  height: 10%;
+}
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.title-margin {
+  margin: 12px;
+}
+
+.max-width {
+  width: 100%;
+}

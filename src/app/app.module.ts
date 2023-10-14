@@ -8,8 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,10 +27,11 @@ import { AddInventoryItemComponent } from './core/inventory-management/add-inven
 import { DialogContentService } from './shared/services/dialog-content/dialog-content.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { DataSharingService } from './shared/services/data-sharing.service';
 import { ItemManagementService } from './shared/services/item-management/item-management.service';
 import { DeleteInventoryItemComponent } from './core/inventory-management/delete-inventory-item/delete-inventory-item.component';
 import { UpdateInventoryItemComponent } from './core/inventory-management/update-inventory-item/update-inventory-item.component';
+import { UserManagementComponent } from './core/user-management/user-management.component';
+import { LoginUserComponent } from './core/user-management/login-user/login-user.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { UpdateInventoryItemComponent } from './core/inventory-management/update
     InventoryTableComponent,
     AddInventoryItemComponent,
     DeleteInventoryItemComponent,
-    UpdateInventoryItemComponent
+    UpdateInventoryItemComponent,
+    UserManagementComponent,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +68,7 @@ import { UpdateInventoryItemComponent } from './core/inventory-management/update
   ],
   providers: [
     ItemManagementService,
-    DialogContentService,
-    DataSharingService
+    DialogContentService
   ],
   bootstrap: [AppComponent]
 })

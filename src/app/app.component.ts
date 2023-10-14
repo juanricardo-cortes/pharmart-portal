@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DataSharingService } from './shared/services/data-sharing.service';
 import { ItemManagementService } from './shared/services/item-management/item-management.service';
 
 @Component({
@@ -10,8 +9,7 @@ import { ItemManagementService } from './shared/services/item-management/item-ma
 
 export class AppComponent {
 
-  constructor(private itemManagementService: ItemManagementService,
-    private dataService: DataSharingService) {}
+  constructor(private itemManagementService: ItemManagementService) {}
 
   ngOnInit() {
     this.itemManagementService.fetchData();

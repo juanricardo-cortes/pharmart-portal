@@ -55,6 +55,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #e71d36 !important;
 }
 
+.green-text {
+  color: #1eb980 !important;
+}
+
 .one-third-of-viewport {
   width: 33.33vw;
 }
