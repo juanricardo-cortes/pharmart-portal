@@ -1,23 +1,24 @@
-<mat-toolbar *ngIf="user" class="dark-grey-bg white-text">
-  <button mat-button routerLink="/dashboard" class="nav-text">
-    <span>D A S H B O A R D</span>
+<mat-toolbar *ngIf="user">
+  <span class="nav-title roboto-bold" >PHARMART</span>
+  <span class="nav-space"></span>
+  <button mat-button routerLink="/dashboard" class="nav-text mulish">
+    <span>DASHBOARD</span>
     <mat-icon>apps</mat-icon>
   </button>
-  <button mat-button routerLink="/marketplace" class="nav-text">
-    <span>M A R K E T P L A C E</span>
+  <button mat-button routerLink="/marketplace" class="nav-text mulish">
+    <span>SHOP</span>
     <mat-icon>store</mat-icon>
   </button>
-  <button mat-button routerLink="/inventory" class="nav-text">
-    <span>I N V E N T O R Y</span>
+  <button mat-button routerLink="/inventory" class="nav-text mulish">
+    <span>INVENTORY</span>
     <mat-icon>storage</mat-icon>
   </button>
-  <button mat-button routerLink="/cart" class="nav-text">
-    <span>C A R T</span>
+  <button mat-button routerLink="/cart" class="nav-text mulish">
+    <span>CART</span>
     <mat-icon>shopping_cart</mat-icon>
   </button>
-  <span class="nav-space"></span>
-  <button mat-button  routerLink="/" class="nav-text" (click)="logout()">
-    <span>P H A R M A R T</span>
+  <button mat-button routerLink="/login" class="nav-text mulish" (click)="logout()">
+    <span>LOGOUT</span>
     <mat-icon>power_settings_new</mat-icon>
   </button>
 </mat-toolbar>

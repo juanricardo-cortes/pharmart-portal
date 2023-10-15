@@ -1,4 +1,4 @@
-<h1 class="grey-bg white-text" mat-dialog-title>Update {{item.name}}</h1>
+<h1 mat-dialog-title>Update {{item.name}}</h1>
 <div class="page-margin">
   <form #updateItemForm="ngForm" enctype="multipart/form-data" (ngSubmit)="updateItem()">
     <div mat-dialog-content>
@@ -34,7 +34,7 @@
           Cancel
           <mat-icon>close</mat-icon>
         </button>
-        <button mat-raised-button mat-dialog-close class="orange-bg white-text" type="submit">
+        <button mat-raised-button mat-dialog-close class="orange-bg" type="submit">
           Update
           <mat-icon>edit</mat-icon>
         </button>

@@ -1,14 +1,45 @@
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+  font-family: 'RobotoBold'; /* You can choose a name for the font */
+  src: url('./assets/RobotoSlab-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'RobotoThin'; /* You can choose a name for the font */
+  src: url('./assets/RobotoSlab-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Mulish'; /* You can choose a name for the font */
+  src: url('./assets/Mulish-VariableFont_wght.ttf') format('truetype');
+}
+
+body { margin: 0; font-family: 'Mulish', sans-serif; }
+
+.roboto-bold {
+  font-family: 'RobotoBold', sans-serif !important;
+}
+
+.roboto-thin {
+  font-family: 'RobotoThin', sans-serif !important;
+}
+
+.mulish {
+  font-family: 'Mulish', sans-serif !important;
+}
 
 .page-margin {
   margin-left: 16px;
   margin-right: 16px;
 }
 
+.page-title {
+  font-size: 48px;
+}
+
 .center {
   align-items: center;
   justify-content: center;
+  display: flex;
 }
 
 .page-container {
@@ -27,24 +58,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #e71d36 !important;
 }
 
-.dark-grey-bg {
-  background-color: #202123  !important;
-}
-
-.light-grey-bg {
-  background-color: #444654 !important;
-}
-
-.grey-bg {
-  background-color: #353541 !important;
-}
-
 .green-bg {
   background-color: #1eb980 !important;
-}
-
-.white-text {
-  color: white !important;
 }
 
 .orange-text {
