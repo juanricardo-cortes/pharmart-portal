@@ -14,6 +14,7 @@
 
 .card-content {
   height: 27%;
+  width: 100%;
   font-size: medium;
 }
 
@@ -24,4 +25,44 @@
 .card-image {
   height: 50%;
   min-height: 275px;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
+.remove-button {
+  margin: 0;
+  bottom: 1px;
+}
+
+.add-button {
+  right: 15px;
+  bottom: 2px;
+}
+
+.quantity-input {
+  margin: 0 -10px; /* Add some spacing between the input and buttons */
+}
+
+.quantity-input {
+  width: 40px;
+  background: transparent !important;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+.add-to-cart-container {
+  margin-bottom: 25px;
+  margin-right: 10px;
+  width: 40%;
+}
+
+.add-to-cart-button {
+  float: right;
 }

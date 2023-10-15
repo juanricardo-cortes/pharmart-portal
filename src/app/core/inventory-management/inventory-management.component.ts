@@ -27,7 +27,7 @@ export class InventoryManagementComponent {
 
   ngOnInit() {
     if (!this.user) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/login');
     }
   }
 

@@ -4,5 +4,10 @@ export interface Item {
   description: string;
   price: number;
   image: string;
-  quantity: number
+  stock: number
+}
+
+export interface OrderItem {
+  item: Item,
+  quantity: Number;
 }

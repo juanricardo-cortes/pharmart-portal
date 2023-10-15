@@ -22,6 +22,7 @@ export class NavBarComponent {
 
   logout() {
     this.authManagementService.logOutUser();
+    localStorage.removeItem('user');
     this.user = null;
   }
 }

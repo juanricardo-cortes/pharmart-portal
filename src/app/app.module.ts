@@ -33,6 +33,7 @@ import { UpdateInventoryItemComponent } from './core/inventory-management/update
 import { UserManagementComponent } from './core/user-management/user-management.component';
 import { LoginUserComponent } from './core/user-management/login-user/login-user.component';
 import { CartManagementComponent } from './core/cart-management/cart-management.component';
+import { LandingPageComponent } from './core/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CartManagementComponent } from './core/cart-management/cart-management.
     UpdateInventoryItemComponent,
     UserManagementComponent,
     LoginUserComponent,
-    CartManagementComponent
+    CartManagementComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

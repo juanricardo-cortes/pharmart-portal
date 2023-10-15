@@ -29,6 +29,7 @@ export class LoginUserComponent {
     this.authManagementService.authUser(this.userRequest).subscribe(
       (user) => {
         if(user) {
+          localStorage.setItem('user', JSON.stringify(user));
           this.authManagementService.cacheUser(user);
           this.router.navigateByUrl('/dashboard');
         } else {
@@ -40,7 +41,6 @@ export class LoginUserComponent {
   register() {
     this.userManagementService.createUser(this.userRequest).subscribe(
       (user) => {
-        console.log(user);
         if(user) {
           this.message = this.constants.succcessfulRegister;
         } else {

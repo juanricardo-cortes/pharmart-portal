@@ -44,9 +44,9 @@ export class InventoryTableComponent implements OnInit {
         cell: (item: Item) => `${item.description}`
       },
       {
-        columnDef: 'quantity',
-        header: 'Quantity',
-        cell: (item: Item) => `${item.quantity}`
+        columnDef: 'stock',
+        header: 'Stock',
+        cell: (item: Item) => `${item.stock}`
       },
       {
         columnDef: 'price',

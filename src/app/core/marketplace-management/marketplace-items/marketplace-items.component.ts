@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Item } from 'src/app/shared/interfaces/item';
+import { Item, OrderItem } from 'src/app/shared/interfaces/item';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { ItemManagementService } from 'src/app/shared/services/item-management/i
 })
 export class MarketplaceItemsComponent implements OnInit {
 
-  items?: Item[];
+  items: Item[] = [];
+  orderItems: OrderItem[] = [];
   cols: number = 1;
 
   constructor(private itemManagementService: ItemManagementService) {}
@@ -18,6 +19,7 @@ export class MarketplaceItemsComponent implements OnInit {
     this.updateCols();
     this.itemManagementService.itemList$.subscribe(data => {
       this.items = data;
+      this.getOrderItems();
     });
   }
 
@@ -29,5 +31,15 @@ export class MarketplaceItemsComponent implements OnInit {
   updateCols(): void {
     const screenWidth = window.innerWidth;
     this.cols = (screenWidth / 410) | 0;
+  }
+
+  getOrderItems() {
+    for(const item of this.items) {
+      const order: OrderItem = {
+        item: item,
+        quantity: 1
+      }
+      this.orderItems.push(order)
+    }
   }
 }

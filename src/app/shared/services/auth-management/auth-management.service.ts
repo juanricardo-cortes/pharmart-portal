@@ -31,7 +31,7 @@ export class AuthManagementService {
 
   logOutUser() {
     this.userSubject.next(null);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 
   cacheUser(user: User) {

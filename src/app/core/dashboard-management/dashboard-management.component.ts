@@ -23,7 +23,7 @@ export class DashboardManagementComponent {
 
   ngOnInit() {
     if (!this.user) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/login');
     }
   }
 }

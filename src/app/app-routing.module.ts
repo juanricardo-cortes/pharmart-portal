@@ -4,12 +4,17 @@ import { DashboardManagementComponent } from './core/dashboard-management/dashbo
 import { MarketplaceManagementComponent } from './core/marketplace-management/marketplace-management.component';
 import { InventoryManagementComponent } from './core/inventory-management/inventory-management.component';
 import { LoginUserComponent } from './core/user-management/login-user/login-user.component';
+import { CartManagementComponent } from './core/cart-management/cart-management.component';
+import { LandingPageComponent } from './core/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: LoginUserComponent },
+  { path: 'login', component: LoginUserComponent },
   { path: 'marketplace', component: MarketplaceManagementComponent },
+  { path: 'marketplace/:sellerName', component: MarketplaceManagementComponent },
   { path: 'inventory', component: InventoryManagementComponent},
-  { path: 'dashboard', component: DashboardManagementComponent}
+  { path: 'dashboard', component: DashboardManagementComponent},
+  { path: 'cart', component: CartManagementComponent},
+  { path: '', component: LandingPageComponent}
 ];
 
 @NgModule({
