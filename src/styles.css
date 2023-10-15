@@ -1,15 +1,15 @@
 html, body { height: 100%; }
 
 @font-face {
-  font-family: 'RobotoBold'; /* You can choose a name for the font */
+  font-family: 'RobotoBold';
   src: url('./assets/RobotoSlab-Bold.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RobotoThin'; /* You can choose a name for the font */
+  font-family: 'RobotoThin';
   src: url('./assets/RobotoSlab-VariableFont_wght.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Mulish'; /* You can choose a name for the font */
+  font-family: 'Mulish';
   src: url('./assets/Mulish-VariableFont_wght.ttf') format('truetype');
 }
 
@@ -27,6 +27,10 @@ body { margin: 0; font-family: 'Mulish', sans-serif; }
   font-family: 'Mulish', sans-serif !important;
 }
 
+.bold-roboto {
+  font-family: 'RobotoBold', sans-serif !important;
+
+}
 .page-margin {
   margin-left: 16px;
   margin-right: 16px;
@@ -74,6 +78,18 @@ body { margin: 0; font-family: 'Mulish', sans-serif; }
   color: #1eb980 !important;
 }
 
+.violet-bg {
+  background-color: #8a2be2 !important;
+}
+
 .one-third-of-viewport {
   width: 33.33vw;
+}
+
+.white-text {
+  color: rgba(255, 255, 255, 0.811) !important;
+}
+
+.button-color {
+  background: linear-gradient(to right, #8a2be2, #aa6bdf, #c994e1, #e0a9e8) !important;
 }

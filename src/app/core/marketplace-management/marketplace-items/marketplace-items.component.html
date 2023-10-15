@@ -1,7 +1,7 @@
 <div class="page-container">
   <mat-grid-list cols={{cols}} rowHeight="520px" colWidth="400px">
     <mat-grid-tile *ngFor="let orderItem of orderItems">
-      <mat-card class="card-size">
+      <mat-card class="card-size" mat-elevation="24">
         <mat-card-header class="card-header">
           <div mat-card-avatar></div>
           <mat-card-title class="card-title">{{orderItem.item.name}}</mat-card-title>
@@ -26,8 +26,8 @@
             </button>
           </div>
           <div class="add-to-cart-container">
-            <button mat-raised-button class="green-bg add-to-cart-button">
-              ADD TO CART
+            <button mat-raised-button class="button-color white-text add-to-cart-button">
+              <b>ADD TO CART</b>
             </button>
           </div>
         </mat-card-actions>

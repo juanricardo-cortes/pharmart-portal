@@ -42,6 +42,7 @@
 .add-button {
   right: 15px;
   bottom: 2px;
+  font-weight: bolder !important;
 }
 
 .quantity-input {
