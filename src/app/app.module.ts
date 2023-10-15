@@ -32,6 +32,7 @@ import { DeleteInventoryItemComponent } from './core/inventory-management/delete
 import { UpdateInventoryItemComponent } from './core/inventory-management/update-inventory-item/update-inventory-item.component';
 import { UserManagementComponent } from './core/user-management/user-management.component';
 import { LoginUserComponent } from './core/user-management/login-user/login-user.component';
+import { CartManagementComponent } from './core/cart-management/cart-management.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LoginUserComponent } from './core/user-management/login-user/login-user
     DeleteInventoryItemComponent,
     UpdateInventoryItemComponent,
     UserManagementComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    CartManagementComponent
   ],
   imports: [
     BrowserModule,

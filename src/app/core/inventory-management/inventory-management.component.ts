@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { DialogContentService } from 'src/app/shared/services/dialog-content/dialog-content.service';
 import { AddInventoryItemComponent } from './add-inventory-item/add-inventory-item.component';
+import { AuthManagementService } from 'src/app/shared/services/auth-management/auth-management.service';
+import { filter } from 'rxjs';
+import { User } from 'src/app/shared/interfaces/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventory-management',
@@ -9,10 +13,24 @@ import { AddInventoryItemComponent } from './add-inventory-item/add-inventory-it
 })
 
 export class InventoryManagementComponent {
-  constructor(private dialogService: DialogContentService) {
+  user?: User | null;
 
+  constructor(private dialogService: DialogContentService,
+    private authManagementService: AuthManagementService,
+    private router: Router) {
+    this.authManagementService.user$
+    .pipe(filter(user => user !== null))
+    .subscribe((user) => {
+      this.user = user;
+    });
   }
-  
+
+  ngOnInit() {
+    if (!this.user) {
+      this.router.navigateByUrl('/');
+    }
+  }
+
   openAddDataDialog() {
     this.dialogService.openDialog(AddInventoryItemComponent);
   }
