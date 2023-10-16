@@ -38,9 +38,6 @@ export class AddInventoryItemComponent {
     formData.append('price', this.itemRequest.price.toString());
     formData.append('stock', this.itemRequest.stock.toString());
     formData.append('image', this.itemRequest.image);
-
-    console.log(formData);
-
     this.itemManagementService.postData(formData);
   }
 

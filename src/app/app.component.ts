@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ItemManagementService } from './shared/services/item-management/item-management.service';
 import { AuthManagementService } from './shared/services/auth-management/auth-management.service';
 import { CartManagementService } from './shared/services/cart-management/cart-management.service';
+import { WebSocketService } from './shared/services/web-socket/web-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,14 @@ export class AppComponent {
 
   constructor(private itemManagementService: ItemManagementService,
     private authManagementService: AuthManagementService,
-    private cartManagementService: CartManagementService) {}
+    private cartManagementService: CartManagementService,
+    private webSocketService: WebSocketService) {}
 
   ngOnInit() {
     this.itemManagementService.fetchData();
     this.getUser();
     this.getCart();
+    this.initializeWebSocket();
   }
 
   getUser() {
@@ -31,5 +34,16 @@ export class AppComponent {
 
   getCart() {
     this.cartManagementService.fetchData();
+  }
+
+  initializeWebSocket() {
+    this.webSocketService.getMessages().subscribe(
+      () => {
+        this.itemManagementService.fetchData();
+      },
+      (error) => {
+        console.error('WebSocket error:', error);
+      }
+    );
   }
 }

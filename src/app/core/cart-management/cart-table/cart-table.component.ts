@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { OrderItem } from 'src/app/shared/interfaces/item';
+import { Item, OrderItem } from 'src/app/shared/interfaces/item';
 import { CartManagementService } from 'src/app/shared/services/cart-management/cart-management.service';
+import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 
 @Component({
   selector: 'app-cart-table',
@@ -11,11 +12,11 @@ import { CartManagementService } from 'src/app/shared/services/cart-management/c
 export class CartTableComponent {
 
   dataSource = new MatTableDataSource<OrderItem>();
-  displayedColumns: string[];
+  displayedColumns?: string[];
+  items: Item[] = [];
 
-  constructor(private cartManagementService: CartManagementService) {
-    this.displayedColumns = this.getColumns().map(c => c.columnDef);
-    this.displayedColumns.push('actions');
+  constructor(private cartManagementService: CartManagementService,
+    private itemManagementService: ItemManagementService ) {
   }
 
   getColumns() {
@@ -23,12 +24,35 @@ export class CartTableComponent {
       {
         columnDef: 'name',
         header: 'Name',
-        cell: (orderItem: OrderItem) => `${orderItem.item.name}`
+        cell: (orderItem: OrderItem) => {
+          const item = this.items.find(item => item._id === orderItem.itemId);
+          if (item) {
+            return item.name;
+          }
+          return '';
+        }
       },
       {
         columnDef: 'description',
         header: 'Description',
-        cell: (orderItem: OrderItem) => `${orderItem.item.description}`
+        cell: (orderItem: OrderItem) => {
+          const item = this.items.find(item => item._id === orderItem.itemId);
+          if (item) {
+            return item.description;
+          }
+          return '';
+        }
+      },
+      {
+        columnDef: 'stock',
+        header: 'Stock',
+        cell: (orderItem: OrderItem) => {
+          const item = this.items.find(item => item._id === orderItem.itemId);
+          if (item) {
+            return item.stock;
+          }
+          return '';
+        }
       },
       {
         columnDef: 'quantity',
@@ -38,7 +62,13 @@ export class CartTableComponent {
       {
         columnDef: 'price',
         header: 'Price',
-        cell: (orderItem: OrderItem) => `${orderItem.item.price * orderItem.quantity}`
+        cell: (orderItem: OrderItem) => {
+          const item = this.items.find(item => item._id === orderItem.itemId);
+          if (item) {
+            return item.price * orderItem.quantity;
+          }
+          return '';
+        }
       }
     ];
   }
@@ -48,5 +78,25 @@ export class CartTableComponent {
       this.dataSource.data = orderItems;
       this.dataSource.data = [...this.dataSource.data];
     });
+
+    this.itemManagementService.itemList$.subscribe(data => {
+      this.items = data;
+    });
+
+    this.displayedColumns = this.getColumns().map(c => c.columnDef);
+    this.displayedColumns.push('actions');
   }
+
+  shouldHighlight(data: OrderItem): boolean {
+    if (this.items.length > 0) {
+      const item = this.items.find(item => item._id === data.itemId);
+      if (item) {
+        return item.stock < data.quantity;
+      }
+      return true;
+    }
+    return false;
+  }
+
+
 }

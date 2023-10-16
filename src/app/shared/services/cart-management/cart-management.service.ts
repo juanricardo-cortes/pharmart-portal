@@ -14,7 +14,7 @@ export class CartManagementService {
 
   deleteData(id: string) {
     const currentList = this.orderItemListSubject.value.slice();
-    const index = currentList.findIndex(orderItem => orderItem.item._id === id);
+    const index = currentList.findIndex(orderItem => orderItem.itemId === id);
     if (index >= 0) {
       currentList.splice(index, 1);
       this.orderItemListSubject.next(currentList);
@@ -30,36 +30,38 @@ export class CartManagementService {
   }
 
   postData(orderItem: OrderItem) {
-    const currentList = this.orderItemListSubject.value.slice();
-    currentList.push(orderItem);
-    this.orderItemListSubject.next(currentList);
-
     var orderItemList : OrderItem[] = [];
     const storedString = localStorage.getItem('cart');
     if (storedString !== null && storedString.length > 0) {
-      orderItemList = this.parseOrderItems(storedString);
-      orderItemList.push(orderItem);
+      orderItemList = this.updateOrAddOrderItem(this.parseOrderItems(storedString), orderItem);
     }
     else {
       orderItemList.push(orderItem);
     }
-
+    this.orderItemListSubject.next(orderItemList);
     localStorage.setItem('cart', JSON.stringify(orderItemList));
   }
 
   parseOrderItems(jsonString: string): OrderItem[] {
-    const parsedData: OrderItem[] = JSON.parse(jsonString);
-    return parsedData.map((itemData) => {
-      const item = new Item(
-        itemData.item._id,
-        itemData.item.name,
-        itemData.item.description,
-        itemData.item.price,
-        itemData.item.image,
-        itemData.item.stock
-      );
+    const parsedData: any[] = JSON.parse(jsonString);
 
-      return new OrderItem(item, itemData.quantity);
+    // Map each object in the array to an OrderItem
+    return parsedData.map((itemData) => {
+      return new OrderItem(itemData.itemId, itemData.quantity);
     });
+  }
+
+  updateOrAddOrderItem(orderItems: OrderItem[], newItem: OrderItem): OrderItem[] {
+    const existingItemIndex = orderItems.findIndex((item) => {
+      return item.itemId === newItem.itemId;
+    });
+
+    if (existingItemIndex !== -1) {
+      orderItems[existingItemIndex].quantity += newItem.quantity;
+    } else {
+      orderItems.push(newItem);
+    }
+
+    return orderItems;
   }
 }

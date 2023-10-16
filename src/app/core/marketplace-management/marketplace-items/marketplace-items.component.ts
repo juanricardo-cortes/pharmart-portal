@@ -45,7 +45,7 @@ export class MarketplaceItemsComponent implements OnInit {
   getOrderItems() {
     for(const item of this.items) {
       const order: OrderItem = {
-        item: item,
+        itemId: item._id,
         quantity: 1
       }
       this.orderItems.push(order)
@@ -57,8 +57,11 @@ export class MarketplaceItemsComponent implements OnInit {
   }
 
   addQuantity(orderItem: OrderItem) {
-    if (orderItem.quantity < orderItem.item.stock) {
-      orderItem.quantity++;
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      if (orderItem.quantity < item.stock) {
+        orderItem.quantity++;
+      }
     }
   }
 
@@ -66,5 +69,45 @@ export class MarketplaceItemsComponent implements OnInit {
     if (orderItem.quantity > 1) {
       orderItem.quantity--;
     }
+  }
+
+  getItemName(orderItem: OrderItem) {
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      return item.name
+    }
+    return '';
+  }
+
+  getItemDescription(orderItem: OrderItem) {
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      return item.description
+    }
+    return '';
+  }
+
+  getItemPrice(orderItem: OrderItem) {
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      return item.price
+    }
+    return 0;
+  }
+
+  getItemStock(orderItem: OrderItem) {
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      return item.stock
+    }
+    return 0;
+  }
+
+  getItemImage(orderItem: OrderItem) {
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      return item.image
+    }
+    return '';
   }
 }

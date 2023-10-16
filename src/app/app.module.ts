@@ -35,6 +35,9 @@ import { LoginUserComponent } from './core/user-management/login-user/login-user
 import { CartManagementComponent } from './core/cart-management/cart-management.component';
 import { LandingPageComponent } from './core/landing-page/landing-page.component';
 import { CartTableComponent } from './core/cart-management/cart-table/cart-table.component';
+import { AuthManagementService } from './shared/services/auth-management/auth-management.service';
+import { UserManagementService } from './shared/services/user-management/user-management.service';
+import { WebSocketService } from './shared/services/web-socket/web-socket.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { CartTableComponent } from './core/cart-management/cart-table/cart-table
   ],
   providers: [
     ItemManagementService,
+    AuthManagementService,
+    UserManagementService,
+    WebSocketService,
     DialogContentService
   ],
   bootstrap: [AppComponent]

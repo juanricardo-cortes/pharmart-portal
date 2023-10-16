@@ -6,13 +6,13 @@
           <mat-card class="card-size">
             <mat-card-header class="card-header">
               <div mat-card-avatar></div>
-              <mat-card-title class="card-title">{{orderItem.item.name}}</mat-card-title>
-              <mat-card-subtitle>{{orderItem.item.price}}</mat-card-subtitle>
+              <mat-card-title class="card-title">{{getItemName(orderItem)}}</mat-card-title>
+              <mat-card-subtitle>P: {{getItemPrice(orderItem)}} S: {{getItemStock(orderItem)}}</mat-card-subtitle>
             </mat-card-header>
-            <img class="card-image" mat-card-image [src]="orderItem.item.image">
+            <img class="card-image" mat-card-image [src]="getItemImage(orderItem)">
             <mat-card-content class="card-content">
               <p>
-                {{orderItem.item.description}}
+                {{getItemDescription(orderItem)}}
               </p>
             </mat-card-content>
             <mat-card-actions class="card-actions">

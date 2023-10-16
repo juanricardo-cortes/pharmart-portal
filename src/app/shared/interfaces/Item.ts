@@ -10,5 +10,5 @@ export class Item {
 }
 
 export class OrderItem {
-  constructor(public item: Item, public quantity: number) {}
+  constructor(public itemId: string, public quantity: number) {}
 }
