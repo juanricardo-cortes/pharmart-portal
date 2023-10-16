@@ -45,7 +45,6 @@ export class CartManagementService {
   parseOrderItems(jsonString: string): OrderItem[] {
     const parsedData: any[] = JSON.parse(jsonString);
 
-    // Map each object in the array to an OrderItem
     return parsedData.map((itemData) => {
       return new OrderItem(itemData.itemId, itemData.quantity);
     });

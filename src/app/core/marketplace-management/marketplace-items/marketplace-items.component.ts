@@ -12,6 +12,7 @@ export class MarketplaceItemsComponent implements OnInit {
 
   items: Item[] = [];
   orderItems: OrderItem[] = [];
+  cartItems: OrderItem[] = [];
   cols: number = 1;
   colSpan: string = "410px";
 
@@ -24,6 +25,10 @@ export class MarketplaceItemsComponent implements OnInit {
       this.items = data;
       this.getOrderItems();
     });
+
+    this.cartManagementService.orderItemList$.subscribe(data => {
+      this.cartItems = data;
+    })
   }
 
   @HostListener('window:resize', ['$event'])
@@ -53,15 +58,30 @@ export class MarketplaceItemsComponent implements OnInit {
   }
 
   addToCart(orderItem: OrderItem) {
-    this.cartManagementService.postData(orderItem);
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      const cartItem = this.cartItems.find(c => c.itemId === item._id)
+        if(cartItem) {
+          if (cartItem.quantity+orderItem.quantity <= item.stock)
+            this.cartManagementService.postData(orderItem);
+        } else {
+          if (orderItem.quantity <= item.stock)
+            this.cartManagementService.postData(orderItem);
+        }
+    }
   }
 
   addQuantity(orderItem: OrderItem) {
     const item = this.items.find(item => item._id === orderItem.itemId);
     if (item) {
-      if (orderItem.quantity < item.stock) {
-        orderItem.quantity++;
-      }
+      const cartItem = this.cartItems.find(c => c.itemId === item._id)
+        if(cartItem) {
+          if (cartItem.quantity+orderItem.quantity < item.stock)
+            orderItem.quantity++;
+        } else {
+          if (orderItem.quantity < item.stock)
+            orderItem.quantity++;
+        }
     }
   }
 
