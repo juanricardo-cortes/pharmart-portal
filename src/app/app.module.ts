@@ -34,6 +34,7 @@ import { UserManagementComponent } from './core/user-management/user-management.
 import { LoginUserComponent } from './core/user-management/login-user/login-user.component';
 import { CartManagementComponent } from './core/cart-management/cart-management.component';
 import { LandingPageComponent } from './core/landing-page/landing-page.component';
+import { CartTableComponent } from './core/cart-management/cart-table/cart-table.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { LandingPageComponent } from './core/landing-page/landing-page.component
     UserManagementComponent,
     LoginUserComponent,
     CartManagementComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    CartTableComponent
   ],
   imports: [
     BrowserModule,

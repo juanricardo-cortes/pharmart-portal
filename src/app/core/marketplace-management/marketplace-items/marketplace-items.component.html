@@ -1,37 +1,41 @@
-<div class="page-container">
-  <mat-grid-list cols={{cols}} rowHeight="520px" colWidth="400px">
-    <mat-grid-tile *ngFor="let orderItem of orderItems">
-      <mat-card class="card-size" mat-elevation="24">
-        <mat-card-header class="card-header">
-          <div mat-card-avatar></div>
-          <mat-card-title class="card-title">{{orderItem.item.name}}</mat-card-title>
-          <mat-card-subtitle>{{orderItem.item.price}}</mat-card-subtitle>
-        </mat-card-header>
-        <img class="card-image" mat-card-image [src]="orderItem.item.image">
-        <mat-card-content class="card-content">
-          <p>
-            {{orderItem.item.description}}
-          </p>
-        </mat-card-content>
-        <mat-card-actions class="card-actions">
-          <div class="quantity-container">
-            <button mat-icon-button class="remove-button" aria-label="Example icon button with a heart icon">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <form class="form-position">
-                <input class="quantity-input" type=number name="quantity" [(ngModel)]="orderItem.quantity">
-            </form>
-            <button mat-icon-button class="add-button" aria-label="Example icon button with a home icon">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-          <div class="add-to-cart-container">
-            <button mat-raised-button class="button-color white-text add-to-cart-button">
-              <b>ADD TO CART</b>
-            </button>
-          </div>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="page-container center">
+  <div id="grid-list">
+    <mat-grid-list cols={{cols}} rowHeight="520px" colWidth="410px">
+      <mat-grid-tile *ngFor="let orderItem of orderItems">
+        <div class="mat-elevation-z5">
+          <mat-card class="card-size">
+            <mat-card-header class="card-header">
+              <div mat-card-avatar></div>
+              <mat-card-title class="card-title">{{orderItem.item.name}}</mat-card-title>
+              <mat-card-subtitle>{{orderItem.item.price}}</mat-card-subtitle>
+            </mat-card-header>
+            <img class="card-image" mat-card-image [src]="orderItem.item.image">
+            <mat-card-content class="card-content">
+              <p>
+                {{orderItem.item.description}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions class="card-actions">
+              <div class="quantity-container">
+                <button mat-icon-button class="remove-button" (click)="subQuantity(orderItem)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <form class="form-position">
+                    <input class="quantity-input" type=number name="quantity" [(ngModel)]="orderItem.quantity">
+                </form>
+                <button mat-icon-button class="add-button" (click)="addQuantity(orderItem)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <div class="add-to-cart-container">
+                <button mat-raised-button class="violet add-to-cart-button" (click)="addToCart(orderItem)">
+                  <b>ADD TO CART</b>
+                </button>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 </div>

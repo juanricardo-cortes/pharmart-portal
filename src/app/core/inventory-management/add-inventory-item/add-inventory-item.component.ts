@@ -27,7 +27,7 @@ export class AddInventoryItemComponent {
       description: '',
       price: 0,
       image: emptyFile,
-      quantity: 0
+      stock: 0
     };
   }
 
@@ -36,7 +36,7 @@ export class AddInventoryItemComponent {
     formData.append('name', this.itemRequest.name);
     formData.append('description', this.itemRequest.description);
     formData.append('price', this.itemRequest.price.toString());
-    formData.append('quantity', this.itemRequest.quantity.toString());
+    formData.append('stock', this.itemRequest.stock.toString());
     formData.append('image', this.itemRequest.image);
 
     console.log(formData);

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ItemManagementService } from './shared/services/item-management/item-management.service';
-import { User } from './shared/interfaces/user';
 import { AuthManagementService } from './shared/services/auth-management/auth-management.service';
+import { CartManagementService } from './shared/services/cart-management/cart-management.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +12,13 @@ import { AuthManagementService } from './shared/services/auth-management/auth-ma
 export class AppComponent {
 
   constructor(private itemManagementService: ItemManagementService,
-    private authManagementService: AuthManagementService) {}
+    private authManagementService: AuthManagementService,
+    private cartManagementService: CartManagementService) {}
 
   ngOnInit() {
     this.itemManagementService.fetchData();
     this.getUser();
+    this.getCart();
   }
 
   getUser() {
@@ -25,5 +27,9 @@ export class AppComponent {
       const user = JSON.parse(storedString);
       this.authManagementService.cacheUser(user);
     }
+  }
+
+  getCart() {
+    this.cartManagementService.fetchData();
   }
 }

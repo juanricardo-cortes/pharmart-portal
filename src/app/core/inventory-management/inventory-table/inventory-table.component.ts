@@ -12,8 +12,7 @@ import { UpdateInventoryItemComponent } from '../update-inventory-item/update-in
   styleUrls: ['./inventory-table.component.css']
 })
 
-export class InventoryTableComponent implements OnInit {
-
+export class InventoryTableComponent {
 
   dataSource = new MatTableDataSource<Item>();
   displayedColumns: string[];

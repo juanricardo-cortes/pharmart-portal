@@ -3,12 +3,12 @@ export interface AddItemRequest {
   description: string;
   price: number;
   image: File;
-  quantity: number
+  stock: number
 }
 
 export interface UpdateItemRequest {
   id: string;
   description: string;
   price: number;
-  quantity: number;
+  stock: number;
 }

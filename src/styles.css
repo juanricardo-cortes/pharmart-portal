@@ -90,6 +90,6 @@ body { margin: 0; font-family: 'Mulish', sans-serif; }
   color: rgba(255, 255, 255, 0.811) !important;
 }
 
-.button-color {
-  background: linear-gradient(to right, #8a2be2, #aa6bdf, #c994e1, #e0a9e8) !important;
+.violet {
+  background-color: #e0a9e8 !important;
 }

@@ -1,6 +1,6 @@
 .card-size {
   max-width: 400px;
-  height: 95%;
+  height: 500px !important;
 }
 
 .card-title {
@@ -16,6 +16,9 @@
   height: 27%;
   width: 100%;
   font-size: medium;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  padding: 0 !important;
 }
 
 .card-actions {
@@ -46,7 +49,7 @@
 }
 
 .quantity-input {
-  margin: 0 -10px; /* Add some spacing between the input and buttons */
+  margin: 0 -10px;
 }
 
 .quantity-input {
