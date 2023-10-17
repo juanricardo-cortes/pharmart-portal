@@ -3,7 +3,8 @@ export interface AddItemRequest {
   description: string;
   price: number;
   image: File;
-  stock: number
+  stock: number;
+  commission: number;
 }
 
 export interface UpdateItemRequest {

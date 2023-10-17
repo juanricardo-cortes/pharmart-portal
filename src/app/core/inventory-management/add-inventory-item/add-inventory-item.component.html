@@ -22,8 +22,14 @@
       </p>
       <p>
         <mat-form-field appearance="fill" class="fill">
-          <mat-label class="mulish">Price</mat-label>
+          <mat-label class="mulish">Price <i>(in php)</i></mat-label>
           <input type=number matInput name="price" [(ngModel)]="itemRequest.price">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill" class="fill">
+          <mat-label class="mulish">Commission (%)</mat-label>
+          <input type=number matInput name="commission" [(ngModel)]="itemRequest.commission">
         </mat-form-field>
       </p>
       <div class="drop-area one-third-of-viewport" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">

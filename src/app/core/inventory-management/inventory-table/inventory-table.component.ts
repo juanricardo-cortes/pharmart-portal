@@ -50,7 +50,12 @@ export class InventoryTableComponent {
       {
         columnDef: 'price',
         header: 'Price',
-        cell: (item: Item) => `${item.price}`
+        cell: (item: Item) => 'PHP' + `${item.price}`
+      },
+      {
+        columnDef: 'commission',
+        header: 'Commission',
+        cell: (item: Item) => `${item.commission}` + '%'
       }
     ];
   }

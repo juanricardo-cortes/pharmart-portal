@@ -26,6 +26,12 @@
           <input matInput name="price" [(ngModel)]="item.price">
         </mat-form-field>
       </p>
+      <p>
+        <mat-form-field appearance="fill" class="one-third-of-viewport">
+          <mat-label class="mulish">Commission</mat-label>
+          <input matInput name="Commission" [(ngModel)]="item.commission">
+        </mat-form-field>
+      </p>
       <img class="one-third-of-viewport" mat-card-image [src]="item.image">
     </div>
     <mat-dialog-actions align="end">

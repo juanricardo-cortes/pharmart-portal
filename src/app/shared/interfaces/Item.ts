@@ -5,7 +5,8 @@ export class Item {
     public description: string,
     public price: number,
     public image: string,
-    public stock: number
+    public stock: number,
+    public commission: number
   ) {}
 }
 

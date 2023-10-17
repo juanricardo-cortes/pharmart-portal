@@ -29,7 +29,8 @@ export class AddInventoryItemComponent {
       description: '',
       price: 0,
       image: emptyFile,
-      stock: 0
+      stock: 0,
+      commission: 0
     };
   }
 
@@ -40,6 +41,7 @@ export class AddInventoryItemComponent {
     formData.append('price', this.itemRequest.price.toString());
     formData.append('stock', this.itemRequest.stock.toString());
     formData.append('image', this.itemRequest.image);
+    formData.append('commission', this.itemRequest.commission.toString());
     this.itemManagementService.postData(formData);
 
     this._snackBar.openFromComponent(AddInventoryItemSnackComponent, {
