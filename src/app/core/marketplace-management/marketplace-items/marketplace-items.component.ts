@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Item, OrderItem } from 'src/app/shared/interfaces/item';
 import { CartManagementService } from 'src/app/shared/services/cart-management/cart-management.service';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
+import { AddToCartSnackComponent } from './add-to-cart-snack/add-to-cart-snack.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-marketplace-items',
@@ -17,7 +19,8 @@ export class MarketplaceItemsComponent implements OnInit {
   colSpan: string = "410px";
 
   constructor(private itemManagementService: ItemManagementService,
-    private cartManagementService: CartManagementService) {}
+    private cartManagementService: CartManagementService,
+    private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.updateCols();
@@ -64,9 +67,21 @@ export class MarketplaceItemsComponent implements OnInit {
         if(cartItem) {
           if (cartItem.quantity+orderItem.quantity <= item.stock)
             this.cartManagementService.postData(orderItem);
+
+            this._snackBar.openFromComponent(AddToCartSnackComponent, {
+              horizontalPosition: 'start',
+              verticalPosition: 'bottom',
+              duration: 2000,
+            });
         } else {
           if (orderItem.quantity <= item.stock)
             this.cartManagementService.postData(orderItem);
+
+            this._snackBar.openFromComponent(AddToCartSnackComponent, {
+              horizontalPosition: 'start',
+              verticalPosition: 'bottom',
+              duration: 2000,
+            });
         }
     }
   }

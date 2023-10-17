@@ -13,6 +13,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBar, MatSnackBarRef, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
@@ -38,6 +39,10 @@ import { CartTableComponent } from './core/cart-management/cart-table/cart-table
 import { AuthManagementService } from './shared/services/auth-management/auth-management.service';
 import { UserManagementService } from './shared/services/user-management/user-management.service';
 import { WebSocketService } from './shared/services/web-socket/web-socket.service';
+import { AddInventoryItemSnackComponent } from './core/inventory-management/add-inventory-item/add-inventory-item-snack/add-inventory-item-snack.component';
+import { DeleteInventorySnackComponent } from './core/inventory-management/delete-inventory-item/delete-inventory-snack/delete-inventory-snack.component';
+import { UpdateInventorySnackComponent } from './core/inventory-management/update-inventory-item/update-inventory-snack/update-inventory-snack.component';
+import { AddToCartSnackComponent } from './core/marketplace-management/marketplace-items/add-to-cart-snack/add-to-cart-snack.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,11 @@ import { WebSocketService } from './shared/services/web-socket/web-socket.servic
     LoginUserComponent,
     CartManagementComponent,
     LandingPageComponent,
-    CartTableComponent
+    CartTableComponent,
+    AddInventoryItemSnackComponent,
+    DeleteInventorySnackComponent,
+    UpdateInventorySnackComponent,
+    AddToCartSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +82,8 @@ import { WebSocketService } from './shared/services/web-socket/web-socket.servic
     MatDialogModule,
     MatPaginatorModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     ItemManagementService,

@@ -1,8 +1,9 @@
-import { Component, HostBinding, HostListener } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, HostListener } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Item } from 'src/app/shared/interfaces/item';
 import { AddItemRequest } from 'src/app/shared/interfaces/requests/itemRequest';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
+import { AddInventoryItemSnackComponent } from './add-inventory-item-snack/add-inventory-item-snack.component';
 
 @Component({
   selector: 'app-add-inventory-item',
@@ -13,9 +14,10 @@ export class AddInventoryItemComponent {
 
   item?: Item;
   itemRequest: AddItemRequest;
-  imageName: string = "No file chosen.";
+  imageName: string = "no file chosen";
 
-  constructor(private itemManagementService: ItemManagementService) {
+  constructor(private itemManagementService: ItemManagementService,
+    private _snackBar: MatSnackBar) {
     this.itemRequest = this.initItem();
   }
 
@@ -39,6 +41,12 @@ export class AddInventoryItemComponent {
     formData.append('stock', this.itemRequest.stock.toString());
     formData.append('image', this.itemRequest.image);
     this.itemManagementService.postData(formData);
+
+    this._snackBar.openFromComponent(AddInventoryItemSnackComponent, {
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
+      duration: 2000,
+    });
   }
 
   handleDroppedFiles(files: FileList) {

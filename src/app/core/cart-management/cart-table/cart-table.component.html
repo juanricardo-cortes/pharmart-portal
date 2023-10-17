@@ -2,13 +2,13 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container *ngFor="let column of getColumns()" [matColumnDef]="column.columnDef">
-        <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
-        <td mat-cell *matCellDef="let row">{{column.cell(row)}}</td>
+        <th class="mulish" mat-header-cell *matHeaderCellDef>{{column.header}}</th>
+        <td class="mulish" mat-cell *matCellDef="let row">{{column.cell(row)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let row">
+        <th class="mulish" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="mulish" mat-cell *matCellDef="let row">
           <button mat-icon-button>
             <mat-icon>remove</mat-icon>
           </button>

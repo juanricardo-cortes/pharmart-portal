@@ -6,11 +6,11 @@
           <mat-card class="card-size">
             <mat-card-header class="card-header">
               <div mat-card-avatar></div>
-              <mat-card-title class="card-title">{{getItemName(orderItem)}}</mat-card-title>
-              <mat-card-subtitle>P: {{getItemPrice(orderItem)}} S: {{getItemStock(orderItem)}}</mat-card-subtitle>
+              <mat-card-title class="card-title roboto-bold">{{getItemName(orderItem)}}</mat-card-title>
+              <mat-card-subtitle class="roboto-thin">P: {{getItemPrice(orderItem)}} S: {{getItemStock(orderItem)}}</mat-card-subtitle>
             </mat-card-header>
             <img class="card-image" mat-card-image [src]="getItemImage(orderItem)">
-            <mat-card-content class="card-content">
+            <mat-card-content class="card-content mulish">
               <p>
                 {{getItemDescription(orderItem)}}
               </p>
@@ -28,8 +28,8 @@
                 </button>
               </div>
               <div class="add-to-cart-container">
-                <button mat-raised-button class="violet add-to-cart-button" (click)="addToCart(orderItem)">
-                  <b>ADD TO CART</b>
+                <button mat-raised-button class="accent-bg add-to-cart-button" (click)="addToCart(orderItem)">
+                  <p class="mulish">ADD TO CART</p>
                 </button>
               </div>
             </mat-card-actions>

@@ -1,28 +1,28 @@
-<h1 mat-dialog-title>Update {{item.name}}</h1>
+<h1 class="mulish primary-bg" mat-dialog-title>Update {{item.name}}</h1>
 <div class="page-margin">
   <form #updateItemForm="ngForm" enctype="multipart/form-data" (ngSubmit)="updateItem()">
     <div mat-dialog-content>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
-          <mat-label>Name (disabled)</mat-label>
+          <mat-label class="mulish">Name (disabled)</mat-label>
           <input matInput disabled name="name" [(ngModel)]="item.name">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
-          <mat-label>Description</mat-label>
+          <mat-label class="mulish">Description</mat-label>
           <input matInput name="description" [(ngModel)]="item.description">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
-          <mat-label>Quantity</mat-label>
+          <mat-label class="mulish">Quantity</mat-label>
           <input matInput name="stock" [(ngModel)]="item.stock">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="one-third-of-viewport">
-          <mat-label>Price</mat-label>
+          <mat-label class="mulish">Price</mat-label>
           <input matInput name="price" [(ngModel)]="item.price">
         </mat-form-field>
       </p>
@@ -30,12 +30,12 @@
     </div>
     <mat-dialog-actions align="end">
       <div class="button-container">
-        <button mat-stroked-button mat-dialog-close>
-          Cancel
+        <button mat-stroked-button mat-dialog-close class="mulish">
+          CANCEL
           <mat-icon>close</mat-icon>
         </button>
-        <button mat-raised-button mat-dialog-close class="orange-bg" type="submit">
-          Update
+        <button mat-raised-button mat-dialog-close class="accent-bg mulish" type="submit">
+          UPDATE
           <mat-icon>edit</mat-icon>
         </button>
       </div>
