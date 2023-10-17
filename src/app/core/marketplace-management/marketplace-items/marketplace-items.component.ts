@@ -4,6 +4,7 @@ import { CartManagementService } from 'src/app/shared/services/cart-management/c
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 import { AddToCartSnackComponent } from './add-to-cart-snack/add-to-cart-snack.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-marketplace-items',
@@ -17,12 +18,20 @@ export class MarketplaceItemsComponent implements OnInit {
   cartItems: OrderItem[] = [];
   cols: number = 1;
   colSpan: string = "410px";
+  sellerName: string = 'pharmart';
 
   constructor(private itemManagementService: ItemManagementService,
     private cartManagementService: CartManagementService,
+    private route: ActivatedRoute,
     private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params['sellerName']) {
+        this.sellerName = params['sellerName'];
+      }
+    });
+
     this.updateCols();
     this.itemManagementService.itemList$.subscribe(data => {
       this.items = data;
@@ -51,52 +60,55 @@ export class MarketplaceItemsComponent implements OnInit {
   }
 
   getOrderItems() {
+    const orderItems: OrderItem[] = []
     for(const item of this.items) {
       const order: OrderItem = {
         itemId: item._id,
-        quantity: 1
+        quantity: 1,
+        sellerName: this.sellerName
       }
-      this.orderItems.push(order)
+      orderItems.push(order)
     }
+    this.orderItems = orderItems;
   }
 
   addToCart(orderItem: OrderItem) {
     const item = this.items.find(item => item._id === orderItem.itemId);
     if (item) {
-      const cartItem = this.cartItems.find(c => c.itemId === item._id)
-        if(cartItem) {
-          if (cartItem.quantity+orderItem.quantity <= item.stock)
-            this.cartManagementService.postData(orderItem);
-
-            this._snackBar.openFromComponent(AddToCartSnackComponent, {
-              horizontalPosition: 'start',
-              verticalPosition: 'bottom',
-              duration: 2000,
-            });
+      const totalQuantity = this.cartItems.reduce((total, obj) => {
+        if (obj.itemId === item._id) {
+            return total + obj.quantity;
         } else {
-          if (orderItem.quantity <= item.stock)
-            this.cartManagementService.postData(orderItem);
-
-            this._snackBar.openFromComponent(AddToCartSnackComponent, {
-              horizontalPosition: 'start',
-              verticalPosition: 'bottom',
-              duration: 2000,
-            });
+            return total;
         }
+      }, 0);
+
+      if (totalQuantity+orderItem.quantity <= item.stock) {
+        this.cartManagementService.postData(orderItem);
+
+        this._snackBar.openFromComponent(AddToCartSnackComponent, {
+          horizontalPosition: 'start',
+          verticalPosition: 'bottom',
+          duration: 2000,
+        });
+      }
     }
   }
 
   addQuantity(orderItem: OrderItem) {
     const item = this.items.find(item => item._id === orderItem.itemId);
     if (item) {
-      const cartItem = this.cartItems.find(c => c.itemId === item._id)
-        if(cartItem) {
-          if (cartItem.quantity+orderItem.quantity < item.stock)
-            orderItem.quantity++;
+      const totalQuantity = this.cartItems.reduce((total, obj) => {
+        if (obj.itemId === item._id) {
+            return total + obj.quantity;
         } else {
-          if (orderItem.quantity < item.stock)
-            orderItem.quantity++;
+            return total;
         }
+      }, 0);
+
+      if (totalQuantity+orderItem.quantity <= item.stock) {
+        orderItem.quantity++;
+      }
     }
   }
 

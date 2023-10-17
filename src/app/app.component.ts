@@ -3,6 +3,7 @@ import { ItemManagementService } from './shared/services/item-management/item-ma
 import { AuthManagementService } from './shared/services/auth-management/auth-management.service';
 import { CartManagementService } from './shared/services/cart-management/cart-management.service';
 import { WebSocketService } from './shared/services/web-socket/web-socket.service';
+import { OrderManagementService } from './shared/services/order-management/order-management.service';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,12 @@ export class AppComponent {
   constructor(private itemManagementService: ItemManagementService,
     private authManagementService: AuthManagementService,
     private cartManagementService: CartManagementService,
+    private orderManagementService: OrderManagementService,
     private webSocketService: WebSocketService) {}
 
   ngOnInit() {
-    this.itemManagementService.fetchData();
+    this.getItems();
+    this.getOrders();
     this.getUser();
     this.getCart();
     this.initializeWebSocket();
@@ -45,5 +48,13 @@ export class AppComponent {
         console.error('WebSocket error:', error);
       }
     );
+  }
+
+  getItems() {
+    this.itemManagementService.fetchData();
+  }
+
+  getOrders() {
+    this.orderManagementService.fetchData();
   }
 }

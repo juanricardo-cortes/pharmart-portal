@@ -10,5 +10,9 @@ export class Item {
 }
 
 export class OrderItem {
-  constructor(public itemId: string, public quantity: number) {}
+  constructor(
+    public itemId: string,
+    public quantity: number,
+    public sellerName: string
+  ) {}
 }

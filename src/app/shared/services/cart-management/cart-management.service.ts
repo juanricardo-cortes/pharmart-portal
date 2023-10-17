@@ -12,9 +12,9 @@ export class CartManagementService {
 
   constructor() { }
 
-  deleteData(id: string) {
+  deleteData(itemId: string, sellerName: string) {
     const currentList = this.orderItemListSubject.value.slice();
-    const index = currentList.findIndex(orderItem => orderItem.itemId === id);
+    const index = currentList.findIndex(orderItem => orderItem.itemId === itemId && orderItem.sellerName === sellerName);
     if (index >= 0) {
       currentList.splice(index, 1);
       this.orderItemListSubject.next(currentList);
@@ -42,17 +42,34 @@ export class CartManagementService {
     localStorage.setItem('cart', JSON.stringify(orderItemList));
   }
 
-  parseOrderItems(jsonString: string): OrderItem[] {
+  updateData(orderItems: OrderItem[], newItem: OrderItem) {
+    const existingItemIndex = orderItems.findIndex((item) => {
+      return (item.itemId === newItem.itemId && item.sellerName === newItem.sellerName);
+    });
+
+    if (existingItemIndex !== -1) {
+      orderItems[existingItemIndex] = newItem;
+    }
+    this.orderItemListSubject.next(orderItems);
+    localStorage.setItem('cart', JSON.stringify(orderItems));
+  }
+
+  emptyData() {
+    this.orderItemListSubject.next([]);
+    localStorage.removeItem('cart');
+  }
+
+  private parseOrderItems(jsonString: string): OrderItem[] {
     const parsedData: any[] = JSON.parse(jsonString);
 
     return parsedData.map((itemData) => {
-      return new OrderItem(itemData.itemId, itemData.quantity);
+      return new OrderItem(itemData.itemId, itemData.quantity, itemData.sellerName);
     });
   }
 
-  updateOrAddOrderItem(orderItems: OrderItem[], newItem: OrderItem): OrderItem[] {
+  private updateOrAddOrderItem(orderItems: OrderItem[], newItem: OrderItem): OrderItem[] {
     const existingItemIndex = orderItems.findIndex((item) => {
-      return item.itemId === newItem.itemId;
+      return (item.itemId === newItem.itemId && item.sellerName === newItem.sellerName);
     });
 
     if (existingItemIndex !== -1) {
@@ -63,4 +80,7 @@ export class CartManagementService {
 
     return orderItems;
   }
+
+
+
 }

@@ -14,6 +14,7 @@ export class CartTableComponent {
   dataSource = new MatTableDataSource<OrderItem>();
   displayedColumns?: string[];
   items: Item[] = [];
+  cartItems: OrderItem[] = [];
 
   constructor(private cartManagementService: CartManagementService,
     private itemManagementService: ItemManagementService ) {
@@ -38,10 +39,15 @@ export class CartTableComponent {
         cell: (orderItem: OrderItem) => {
           const item = this.items.find(item => item._id === orderItem.itemId);
           if (item) {
-            return item.description;
+            return item.description.substring(0, 60) + '...';
           }
           return '';
         }
+      },
+      {
+        columnDef: 'sellerName',
+        header: 'Seller',
+        cell: (orderItem: OrderItem) => `${orderItem.sellerName}`
       },
       {
         columnDef: 'stock',
@@ -76,6 +82,7 @@ export class CartTableComponent {
   ngOnInit() {
     this.cartManagementService.orderItemList$.subscribe(orderItems => {
       this.dataSource.data = orderItems;
+      this.cartItems = orderItems;
       this.dataSource.data = [...this.dataSource.data];
     });
 
@@ -98,5 +105,20 @@ export class CartTableComponent {
     return false;
   }
 
+  addQuantity(orderItem: OrderItem) {
+    const item = this.items.find(item => item._id === orderItem.itemId);
+    if (item) {
+      if (orderItem.quantity < item.stock)
+        orderItem.quantity++;
+        this.cartManagementService.updateData(this.cartItems, orderItem);
+    }
+  }
+
+  subQuantity(orderItem: OrderItem) {
+    if (orderItem.quantity > 1) {
+      orderItem.quantity--;
+      this.cartManagementService.updateData(this.cartItems, orderItem);
+    }
+  }
 
 }

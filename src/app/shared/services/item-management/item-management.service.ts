@@ -14,7 +14,6 @@ export class ItemManagementService {
 
   constructor(private http: HttpClient) {
     this.constants = new Constants();
-
   }
 
   private itemListSubject = new BehaviorSubject<Item[]>([]);
