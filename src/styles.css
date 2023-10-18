@@ -51,7 +51,7 @@ body { margin: 0; font-family: 'Mulish', sans-serif; }
 .center {
   align-items: center;
   justify-content: center;
-  display: flex;
+  display: flex !important;
 }
 
 .page-container {
@@ -80,34 +80,18 @@ body { margin: 0; font-family: 'Mulish', sans-serif; }
 }
 
 .primary-bg {
-  background-color: #c9a0dc !important;
+  background-color: #6200ee !important;
 }
 
 .primary-text {
-  color: #c9a0dc !important;
+  color: #6200ee !important;
 }
 
 .accent-bg {
-  background-color: #b483c0 !important;
+  background-color: #03dac5  !important;
 }
 
 .accent-text {
-  color: #b483c0 !important;
+  color: #03dac5  !important;
 }
 
-/* .primary-bg {
-  background-color: #ff8e71 !important;
-}
-
-.primary-text {
-  color: #ff8e71 !important;
-}
-
-.accent-bg {
-  background-color: #ff6b6b  !important;
-}
-
-.accent-text {
-  color: #ff6b6b  !important;
-}
- */

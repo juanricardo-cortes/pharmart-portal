@@ -9,3 +9,7 @@
 .nav-title {
   font-size: x-large;
 }
+
+.nav-bg {
+  background-color: #f0f0ee !important;
+}

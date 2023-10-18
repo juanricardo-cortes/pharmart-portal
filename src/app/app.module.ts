@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar, MatSnackBarRef, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
@@ -43,6 +44,10 @@ import { AddInventoryItemSnackComponent } from './core/inventory-management/add-
 import { DeleteInventorySnackComponent } from './core/inventory-management/delete-inventory-item/delete-inventory-snack/delete-inventory-snack.component';
 import { UpdateInventorySnackComponent } from './core/inventory-management/update-inventory-item/update-inventory-snack/update-inventory-snack.component';
 import { AddToCartSnackComponent } from './core/marketplace-management/marketplace-items/add-to-cart-snack/add-to-cart-snack.component';
+import { DashboardCardsComponent } from './core/dashboard-management/dashboard-cards/dashboard-cards.component';
+import { DashboardTableComponent } from './core/dashboard-management/dashboard-table/dashboard-table.component';
+import { DashboardGraphComponent } from './core/dashboard-management/dashboard-graph/dashboard-graph.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -64,7 +69,10 @@ import { AddToCartSnackComponent } from './core/marketplace-management/marketpla
     AddInventoryItemSnackComponent,
     DeleteInventorySnackComponent,
     UpdateInventorySnackComponent,
-    AddToCartSnackComponent
+    AddToCartSnackComponent,
+    DashboardCardsComponent,
+    DashboardTableComponent,
+    DashboardGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +91,9 @@ import { AddToCartSnackComponent } from './core/marketplace-management/marketpla
     MatPaginatorModule,
     FormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HighchartsChartModule,
+    MatDividerModule
   ],
   providers: [
     ItemManagementService,

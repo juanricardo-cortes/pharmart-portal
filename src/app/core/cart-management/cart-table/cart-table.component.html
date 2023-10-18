@@ -9,10 +9,10 @@
       <ng-container matColumnDef="actions">
         <th class="mulish" mat-header-cell *matHeaderCellDef>Actions</th>
         <td class="mulish" mat-cell *matCellDef="let row">
-          <button mat-icon-button (click)="subQuantity(row)">
+          <button class="accent-text" mat-icon-button (click)="subQuantity(row)">
             <mat-icon>remove</mat-icon>
           </button>
-          <button mat-icon-button (click)="addQuantity(row)">
+          <button class="accent-text" mat-icon-button (click)="addQuantity(row)">
             <mat-icon>add</mat-icon>
           </button>
         </td>

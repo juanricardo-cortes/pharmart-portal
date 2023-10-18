@@ -12,4 +12,5 @@ export interface UpdateItemRequest {
   description: string;
   price: number;
   stock: number;
+  commission: number;
 }

@@ -65,7 +65,8 @@ export class MarketplaceItemsComponent implements OnInit {
       const order: OrderItem = {
         itemId: item._id,
         quantity: 1,
-        sellerName: this.sellerName
+        sellerName: this.sellerName,
+        createdAt: new Date()
       }
       orderItems.push(order)
     }

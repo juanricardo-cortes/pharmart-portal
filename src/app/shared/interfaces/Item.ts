@@ -14,6 +14,7 @@ export class OrderItem {
   constructor(
     public itemId: string,
     public quantity: number,
-    public sellerName: string
+    public sellerName: string,
+    public createdAt: Date
   ) {}
 }

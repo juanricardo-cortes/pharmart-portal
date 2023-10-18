@@ -63,7 +63,7 @@ export class CartManagementService {
     const parsedData: any[] = JSON.parse(jsonString);
 
     return parsedData.map((itemData) => {
-      return new OrderItem(itemData.itemId, itemData.quantity, itemData.sellerName);
+      return new OrderItem(itemData.itemId, itemData.quantity, itemData.sellerName, itemData.createdAt);
     });
   }
 

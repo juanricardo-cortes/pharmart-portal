@@ -25,7 +25,8 @@ export class UpdateInventoryItemComponent {
       id: this.item._id,
       description: this.item.description,
       price: this.item.price,
-      stock: this.item.stock
+      stock: this.item.stock,
+      commission: this.item.commission
     };
 
     this.itemManagementService.updateData(this.updateItemRequest);
