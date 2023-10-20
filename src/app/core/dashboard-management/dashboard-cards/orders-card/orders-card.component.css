@@ -1,0 +1,26 @@
+.mat-icon,
+.description {
+  color: green;
+  font-size: 2em;
+}
+
+.mat-icon {
+  position: relative;
+  padding: 0 20px;
+  top: 5px;
+}
+
+.card-size {
+  width: 400px;
+  height: 150px !important;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: large;
+}
+
+.card-header {
+  height: 45%;
+}
+

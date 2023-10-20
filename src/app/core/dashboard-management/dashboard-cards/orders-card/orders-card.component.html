@@ -1,0 +1,12 @@
+<div class="mat-elevation-z5">
+  <mat-card class="card-size">
+    <mat-card-header class="card-header">
+      <div mat-card-avatar><mat-icon color="primary">trending_up</mat-icon></div>
+      <mat-card-title class="card-title roboto-bold">{{ label }}: {{ total }}</mat-card-title>
+      <mat-card-subtitle class="roboto-thin">
+        {{ percentage }}% from previous month
+      </mat-card-subtitle>
+    </mat-card-header>
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+  </mat-card>
+</div>

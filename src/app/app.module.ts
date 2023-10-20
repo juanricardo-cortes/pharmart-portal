@@ -48,6 +48,12 @@ import { DashboardCardsComponent } from './core/dashboard-management/dashboard-c
 import { DashboardTableComponent } from './core/dashboard-management/dashboard-table/dashboard-table.component';
 import { DashboardGraphComponent } from './core/dashboard-management/dashboard-graph/dashboard-graph.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { SellersCardComponent } from './core/dashboard-management/dashboard-cards/sellers-card/sellers-card.component';
+import { OrdersCardComponent } from './core/dashboard-management/dashboard-cards/orders-card/orders-card.component';
+import { SalesCardComponent } from './core/dashboard-management/dashboard-cards/sales-card/sales-card.component';
+import { OrderManagementService } from './shared/services/order-management/order-management.service';
+import { OrderTrackerService } from './shared/services/order-tracker-management/order-tracker.service';
+import { CartManagementService } from './shared/services/cart-management/cart-management.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +78,10 @@ import { HighchartsChartModule } from 'highcharts-angular';
     AddToCartSnackComponent,
     DashboardCardsComponent,
     DashboardTableComponent,
-    DashboardGraphComponent
+    DashboardGraphComponent,
+    SellersCardComponent,
+    OrdersCardComponent,
+    SalesCardComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +108,10 @@ import { HighchartsChartModule } from 'highcharts-angular';
     ItemManagementService,
     AuthManagementService,
     UserManagementService,
+    OrderManagementService,
+    OrderTrackerService,
     WebSocketService,
+    CartManagementService,
     DialogContentService
   ],
   bootstrap: [AppComponent]

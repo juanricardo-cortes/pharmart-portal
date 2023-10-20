@@ -4,6 +4,7 @@ import { AuthManagementService } from './shared/services/auth-management/auth-ma
 import { CartManagementService } from './shared/services/cart-management/cart-management.service';
 import { WebSocketService } from './shared/services/web-socket/web-socket.service';
 import { OrderManagementService } from './shared/services/order-management/order-management.service';
+import { OrderTrackerService } from './shared/services/order-tracker-management/order-tracker.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
     private authManagementService: AuthManagementService,
     private cartManagementService: CartManagementService,
     private orderManagementService: OrderManagementService,
+    private orderTrackerService: OrderTrackerService,
     private webSocketService: WebSocketService) {}
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class AppComponent {
     this.getUser();
     this.getCart();
     this.initializeWebSocket();
+    this.getTracks();
   }
 
   getUser() {
@@ -56,5 +59,9 @@ export class AppComponent {
 
   getOrders() {
     this.orderManagementService.fetchData();
+  }
+
+  getTracks() {
+    this.orderTrackerService.fetchData();
   }
 }

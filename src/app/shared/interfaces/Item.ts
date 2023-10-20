@@ -18,3 +18,12 @@ export class OrderItem {
     public createdAt: Date
   ) {}
 }
+
+export class OrderTracker {
+  constructor(
+    public _id: string,
+    public total: number,
+    public orders: string[],
+    public createdAt: Date
+  ) {}
+}
