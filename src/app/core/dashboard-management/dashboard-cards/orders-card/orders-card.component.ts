@@ -96,26 +96,28 @@ export class OrdersCardComponent implements OnInit {
   }
 
   getNumberOfTracks(tracks: OrderTracker[]) {
-    console.log(tracks)
     const currentDate = new Date();
     const fourMonthsAgo = new Date(currentDate);
     fourMonthsAgo.setMonth(fourMonthsAgo.getMonth() - 4);
+    fourMonthsAgo.setDate(1);
 
     const trackCounts: number[] = [0,0,0,0];
 
     const filteredTracks = tracks.filter((track) => {
       var trackDate = new Date(track.createdAt);
-      if (trackDate.getMonth() >= fourMonthsAgo.getMonth()) {
+      if (trackDate >= fourMonthsAgo) {
         return track;
       }
       return null;
     });
+    
     filteredTracks.forEach((track) => {
       var trackDate = new Date(track.createdAt);
       const monthDiff = Math.abs(currentDate.getMonth() - trackDate.getMonth());
       trackCounts[3 - monthDiff]++;;
     });
 
+    this.data = trackCounts;
     this.total = trackCounts[3].toString();
     this.percentage = Math.round(((trackCounts[3] - trackCounts[2])/trackCounts[2]) * 100).toString();
     this.initializeChartOptions();

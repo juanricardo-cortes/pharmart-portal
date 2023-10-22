@@ -101,12 +101,13 @@ export class SellersCardComponent implements OnInit{
     const currentDate = new Date();
     const fourMonthsAgo = new Date(currentDate);
     fourMonthsAgo.setMonth(fourMonthsAgo.getMonth() - 4);
+    fourMonthsAgo.setDate(1);
 
     const userCounts: number[] = [0,0,0,0];
 
     const filteredUsers = users.filter((user) => {
       var userDate = new Date(user.createdAt);
-      if (userDate.getMonth() >= fourMonthsAgo.getMonth()) {
+      if (userDate >= fourMonthsAgo) {
         return user;
       }
       return null;

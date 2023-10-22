@@ -54,6 +54,8 @@ import { SalesCardComponent } from './core/dashboard-management/dashboard-cards/
 import { OrderManagementService } from './shared/services/order-management/order-management.service';
 import { OrderTrackerService } from './shared/services/order-tracker-management/order-tracker.service';
 import { CartManagementService } from './shared/services/cart-management/cart-management.service';
+import { SalesGraphComponent } from './core/dashboard-management/dashboard-graph/sales-graph/sales-graph.component';
+import { OrdersGraphComponent } from './core/dashboard-management/dashboard-graph/orders-graph/orders-graph.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { CartManagementService } from './shared/services/cart-management/cart-ma
     DashboardGraphComponent,
     SellersCardComponent,
     OrdersCardComponent,
-    SalesCardComponent
+    SalesCardComponent,
+    SalesGraphComponent,
+    OrdersGraphComponent
   ],
   imports: [
     BrowserModule,

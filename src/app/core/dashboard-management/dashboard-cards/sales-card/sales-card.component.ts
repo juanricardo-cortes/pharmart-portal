@@ -105,12 +105,13 @@ export class SalesCardComponent implements OnInit {
     const currentDate = new Date();
     const fourMonthsAgo = new Date(currentDate);
     fourMonthsAgo.setMonth(fourMonthsAgo.getMonth() - 4);
+    fourMonthsAgo.setDate(1);
 
     const orderCounts: number[] = [0,0,0,0];
 
     const filteredOrders = orders.filter((order) => {
       var orderDate = new Date(order.createdAt);
-      if (orderDate.getMonth() >= fourMonthsAgo.getMonth()) {
+      if (orderDate >= fourMonthsAgo) {
         return order;
       }
       return null;
