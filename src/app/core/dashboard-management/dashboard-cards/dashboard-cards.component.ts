@@ -11,8 +11,9 @@ export class DashboardCardsComponent {
 
   ngOnInit() {
     const div = document.getElementById('card-grid');
+    const width = 410 * 3;
+    
     if (div) {
-      const width = 410 * 3;
       div.style.width = width.toString() + 'px';
     }
   }

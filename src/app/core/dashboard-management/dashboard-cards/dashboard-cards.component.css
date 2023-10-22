@@ -1,0 +1,21 @@
+.dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sellers-card, .sales-card, .orders-card {
+  flex: 1;
+}
+
+.empty-space-one, .empty-space-two {
+  margin: 10px;
+  height: 150px !important;
+}
+
+@media (max-width: 820px) {
+  .empty-space-one, .empty-space-two {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}

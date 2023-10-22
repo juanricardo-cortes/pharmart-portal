@@ -1,3 +1,9 @@
 .dashboard-graph {
-  float: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sales-graph .orders-graph {
+  flex: 1;
 }
