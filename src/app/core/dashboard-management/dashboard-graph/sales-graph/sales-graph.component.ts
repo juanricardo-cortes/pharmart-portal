@@ -1,13 +1,16 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { OrderItem } from 'src/app/shared/interfaces/item';
 import { ItemManagementService } from 'src/app/shared/services/item-management/item-management.service';
 import { OrderManagementService } from 'src/app/shared/services/order-management/order-management.service';
+import exporting from 'highcharts/modules/exporting';
+exporting(Highcharts);
 
 @Component({
   selector: 'app-sales-graph',
   templateUrl: './sales-graph.component.html',
-  styleUrls: ['./sales-graph.component.css']
+  styleUrls: ['./sales-graph.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class SalesGraphComponent implements OnInit{
 
@@ -17,52 +20,51 @@ export class SalesGraphComponent implements OnInit{
 
   constructor(private orderManagementService: OrderManagementService,
     private itemManagementService: ItemManagementService,
-    private cdr: ChangeDetectorRef) {}
+    private cdr: ChangeDetectorRef) {
+      this.chartOptions = {
+        chart: {
+          width: 600,
+        },
+        title: {
+          text: 'Sales per Month'
+        },
+        plotOptions: {
+          line: {
+              color: '#03dac5'
+          }
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        credits: {
+          enabled: false
+        },
+        exporting: {
+          enabled: true,
+        },
+        xAxis: {
+          title: {
+            text: 'Month'
+          },
+          categories: this.getMonths(),
+          accessibility: {
+              description: 'Months of the year'
+          }
+        },
+        series: [
+          {
+            name: "Sales",
+            type: 'line',
+            data: this.data,
+          },
+        ],
+      };
+    }
 
   ngOnInit() {
     this.initializeOrderList();
-  }
-
-  initializeChartOptions() {
-    this.chartOptions = {
-      chart: {
-        width: 600,
-      },
-      title: {
-        text: 'Sales per Month'
-      },
-      plotOptions: {
-        line: {
-            color: '#03dac5'
-        }
-      },
-      yAxis: {
-          title: {
-              text: ''
-          }
-      },
-      credits: {
-        enabled: false
-      },
-      xAxis: {
-        title: {
-          text: 'Month'
-        },
-        categories: this.getMonths(),
-        accessibility: {
-            description: 'Months of the year'
-        }
-      },
-      series: [
-        {
-          name: "Sales",
-          type: 'line',
-          data: this.data,
-        },
-      ],
-    };
-
-    this.cdr.detectChanges();
   }
 
   getMonths() : string[] {
@@ -116,6 +118,46 @@ export class SalesGraphComponent implements OnInit{
     }
 
     this.data = orderCounts;
-    this.initializeChartOptions();
+    this.updateData(orderCounts);
+  }
+
+  updateData(orderCounts: number[]) {
+    if (this.chartOptions.series) {
+      this.chartOptions.series = [
+        {
+          name: 'Sales',
+          type: 'line',
+          data: orderCounts
+        }
+      ]
+      const updatedOptions = { ...this.chartOptions };
+      this.chartOptions = updatedOptions;
+      this.cdr.detectChanges();
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    const newWidth = event.target.innerWidth - 50;
+    if (newWidth <= 1200) {
+      if (this.chartOptions.chart) {
+        this.chartOptions.chart ={
+          width: newWidth,
+        }
+        const updatedOptions = { ...this.chartOptions };
+        this.chartOptions = updatedOptions;
+        this.cdr.detectChanges();
+      }
+    }
+    else {
+      if (this.chartOptions.chart) {
+        this.chartOptions.chart ={
+          width: 600,
+        }
+        const updatedOptions = { ...this.chartOptions };
+        this.chartOptions = updatedOptions;
+        this.cdr.detectChanges();
+      }
+    }
   }
 }

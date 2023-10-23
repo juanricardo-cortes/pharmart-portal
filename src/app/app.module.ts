@@ -56,6 +56,7 @@ import { OrderTrackerService } from './shared/services/order-tracker-management/
 import { CartManagementService } from './shared/services/cart-management/cart-management.service';
 import { SalesGraphComponent } from './core/dashboard-management/dashboard-graph/sales-graph/sales-graph.component';
 import { OrdersGraphComponent } from './core/dashboard-management/dashboard-graph/orders-graph/orders-graph.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { OrdersGraphComponent } from './core/dashboard-management/dashboard-grap
     HttpClientModule,
     MatSnackBarModule,
     HighchartsChartModule,
-    MatDividerModule
+    MatDividerModule,
+    FlexLayoutModule
   ],
   providers: [
     ItemManagementService,

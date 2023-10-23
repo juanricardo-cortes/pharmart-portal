@@ -38,11 +38,6 @@ export class InventoryTableComponent {
         cell: (item: Item) => `${item.name}`
       },
       {
-        columnDef: 'description',
-        header: 'Description',
-        cell: (item: Item) => `${item.description}`
-      },
-      {
         columnDef: 'stock',
         header: 'Stock',
         cell: (item: Item) => `${item.stock}`

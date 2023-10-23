@@ -44,8 +44,19 @@ export class AppComponent {
 
   initializeWebSocket() {
     this.webSocketService.getMessages().subscribe(
-      () => {
-        this.itemManagementService.fetchData();
+      (data) => {
+        if(data.model === 'Item') {
+          this.itemManagementService.fetchData();
+        }
+        else if(data.model === 'Order') {
+          this.orderManagementService.fetchData();
+        }
+        else if(data.model === 'OrderTracker') {
+          this.orderTrackerService.fetchData();
+        }
+        else {
+          console.log("WARNING: UNKNOWN MODEL CHANGED")
+        }
       },
       (error) => {
         console.error('WebSocket error:', error);

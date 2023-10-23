@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { OrderItem } from 'src/app/shared/interfaces/item';
@@ -8,89 +8,82 @@ import { OrderManagementService } from 'src/app/shared/services/order-management
 @Component({
   selector: 'app-sales-card',
   templateUrl: './sales-card.component.html',
-  styleUrls: ['./sales-card.component.css']
+  styleUrls: ['./sales-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class SalesCardComponent implements OnInit {
+
   label: string = "Sales this month";
   total: string = "0";
   percentage: string = "0";
   data = [1,2,3,4];
 
   Highcharts = Highcharts;
-  chartOptions = {};
+  chartOptions: Highcharts.Options = {};
 
   constructor(private orderManagementService: OrderManagementService,
     private itemManagementService: ItemManagementService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef) {
+      this.chartOptions = {
+        chart: {
+          type: 'area',
+          borderWidth: 0,
+          margin: [2, 2, 2, 2],
+          height: 60
+        },
+        plotOptions: {
+          area: {
+              color: '#03dac5'
+          }
+        },
+        title: {
+          text: undefined
+        },
+        subtitle: {
+          text: undefined
+        },
+        tooltip: {
+        },
+        legend: {
+          enabled: false
+        },
+        credits: {
+          enabled: false
+        },
+        exporting: {
+          enabled: false,
+        },
+        xAxis: {
+          labels: {
+            enabled: false,
+          },
+          title: {
+            text: null
+          },
+          categories: this.getMonths(),
+        },
+        yAxis: {
+          labels: {
+            enabled: false,
+          },
+          title: {
+            text: null
+          },
+          startOnTick: false,
+          gridLineColor: undefined,
+          endOnTick: false,
+        },
+        series: [
+          {
+            type: 'area',
+            data: this.data,
+          }
+        ]
+      };
+    }
 
   ngOnInit() {
     this.initializeOrderList();
-  }
-
-  initializeChartOptions() {
-    this.chartOptions = {
-      chart: {
-        type: 'area',
-        backgroundColor: null,
-        borderWidth: 0,
-        margin: [2, 2, 2, 2],
-        height: 60
-      },
-      plotOptions: {
-        area: {
-          threshold: null,
-            color: '#03dac5'
-        },
-        series: {
-          connectNulls: false // Disable connecting null values
-        }
-      },
-      title: {
-        text: null
-      },
-      subtitle: {
-        text: null
-      },
-      legend: {
-        enabled: false
-      },
-      credits: {
-        enabled: false
-      },
-      exporting: {
-        enabled: false,
-      },
-      xAxis: {
-        labels: {
-          enabled: false,
-        },
-        title: {
-          text: null
-        },
-        startOnTick: false,
-        endOnTick: false,
-        tickOptions: []
-      },
-      yAxis: {
-        labels: {
-          enabled: false,
-        },
-        title: {
-          text: null
-        },
-        startOnTick: false,
-        endOnTick: false,
-        gridLineColor: null,
-        tickOptions: []
-      },
-      series: [{
-        name: "Sales",
-        data: this.data
-      }]
-    };
-
-    HC_exporting(Highcharts);
-    this.cdr.detectChanges();
   }
 
   initializeOrderList() {
@@ -131,6 +124,37 @@ export class SalesCardComponent implements OnInit {
     this.data = orderCounts;
     this.total = orderCounts[3].toString();
     this.percentage = Math.round(((orderCounts[3] - orderCounts[2])/orderCounts[2]) * 100).toString();
-    this.initializeChartOptions();
+    this.updateData(orderCounts);
   }
+
+  getMonths() : string[] {
+    const currentDate = new Date();
+    const monthsInWords : string[] = [];
+
+    for (let i = 0; i < 4; i++) {
+      const pastDate = new Date(currentDate);
+      pastDate.setMonth(currentDate.getMonth() - i);
+
+      const monthInWords = pastDate.toLocaleString('en-US', { month: 'short' });
+      monthsInWords.push(monthInWords);
+    }
+
+    return monthsInWords.reverse();
+  }
+
+  updateData(orderCounts: number[]) {
+    if (this.chartOptions.series) {
+      this.chartOptions.series = [
+        {
+          name: 'Sales',
+          type: 'area',
+          data: orderCounts
+        }
+      ]
+      const updatedOptions = { ...this.chartOptions };
+      this.chartOptions = updatedOptions;
+      this.cdr.detectChanges();
+    }
+  }
+
 }

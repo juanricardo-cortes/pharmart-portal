@@ -34,17 +34,6 @@ export class CartTableComponent {
         }
       },
       {
-        columnDef: 'description',
-        header: 'Description',
-        cell: (orderItem: OrderItem) => {
-          const item = this.items.find(item => item._id === orderItem.itemId);
-          if (item) {
-            return item.description.substring(0, 60) + '...';
-          }
-          return '';
-        }
-      },
-      {
         columnDef: 'sellerName',
         header: 'Seller',
         cell: (orderItem: OrderItem) => `${orderItem.sellerName}`

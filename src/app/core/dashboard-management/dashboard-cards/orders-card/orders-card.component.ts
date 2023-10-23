@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { OrderTracker } from 'src/app/shared/interfaces/item';
@@ -7,7 +7,8 @@ import { OrderTrackerService } from 'src/app/shared/services/order-tracker-manag
 @Component({
   selector: 'app-orders-card',
   templateUrl: './orders-card.component.html',
-  styleUrls: ['./orders-card.component.css']
+  styleUrls: ['./orders-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class OrdersCardComponent implements OnInit {
   label: string = "Orders this month";
@@ -16,75 +17,70 @@ export class OrdersCardComponent implements OnInit {
   data = [1,2,3,4];
 
   Highcharts = Highcharts;
-  chartOptions = {};
+  chartOptions: Highcharts.Options = {};
 
   constructor(private orderTrackerService: OrderTrackerService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef) {
+      this.chartOptions = {
+        chart: {
+          type: 'area',
+          borderWidth: 0,
+          margin: [2, 2, 2, 2],
+          height: 60
+        },
+        plotOptions: {
+          area: {
+              color: '#03dac5'
+          }
+        },
+        title: {
+          text: undefined
+        },
+        subtitle: {
+          text: undefined
+        },
+        tooltip: {
+        },
+        legend: {
+          enabled: false
+        },
+        credits: {
+          enabled: false
+        },
+        exporting: {
+          enabled: false,
+        },
+        xAxis: {
+          labels: {
+            enabled: false,
+          },
+          title: {
+            text: null
+          },
+          categories: this.getMonths(),
+        },
+        yAxis: {
+          labels: {
+            enabled: false,
+          },
+          title: {
+            text: null
+          },
+          startOnTick: false,
+          gridLineColor: undefined,
+          endOnTick: false,
+        },
+        series: [
+          {
+            type: 'area',
+            data: this.data,
+          }
+        ]
+      };
+     }
 
   ngOnInit() {
     this.initializeTrackList();
-  }
-
-  initializeChartOptions() {
-    this.chartOptions = {
-      chart: {
-        type: 'area',
-        backgroundColor: null,
-        borderWidth: 0,
-        margin: [2, 2, 2, 2],
-        height: 60
-      },
-      plotOptions: {
-        area: {
-            color: '#03dac5'
-        }
-      },
-      title: {
-        text: null
-      },
-      subtitle: {
-        text: null
-      },
-      legend: {
-        enabled: false
-      },
-      credits: {
-        enabled: false
-      },
-      exporting: {
-        enabled: false,
-      },
-      xAxis: {
-        labels: {
-          enabled: false,
-        },
-        title: {
-          text: null
-        },
-        startOnTick: false,
-        endOnTick: false,
-        tickOptions: []
-      },
-      yAxis: {
-        labels: {
-          enabled: false,
-        },
-        title: {
-          text: null
-        },
-        startOnTick: false,
-        endOnTick: false,
-        gridLineColor: null,
-        tickOptions: []
-      },
-      series: [{
-        name: "Orders",
-        data: this.data
-      }]
-    };
-
-    HC_exporting(Highcharts);
-    this.cdr.detectChanges();
   }
 
   initializeTrackList() {
@@ -110,7 +106,7 @@ export class OrdersCardComponent implements OnInit {
       }
       return null;
     });
-    
+
     filteredTracks.forEach((track) => {
       var trackDate = new Date(track.createdAt);
       const monthDiff = Math.abs(currentDate.getMonth() - trackDate.getMonth());
@@ -120,6 +116,36 @@ export class OrdersCardComponent implements OnInit {
     this.data = trackCounts;
     this.total = trackCounts[3].toString();
     this.percentage = Math.round(((trackCounts[3] - trackCounts[2])/trackCounts[2]) * 100).toString();
-    this.initializeChartOptions();
+    this.updateData(trackCounts);
+  }
+
+  getMonths() : string[] {
+    const currentDate = new Date();
+    const monthsInWords : string[] = [];
+
+    for (let i = 0; i < 4; i++) {
+      const pastDate = new Date(currentDate);
+      pastDate.setMonth(currentDate.getMonth() - i);
+
+      const monthInWords = pastDate.toLocaleString('en-US', { month: 'short' });
+      monthsInWords.push(monthInWords);
+    }
+
+    return monthsInWords.reverse();
+  }
+
+  updateData(trackCounts: number[]) {
+    if (this.chartOptions.series) {
+      this.chartOptions.series = [
+        {
+          name: 'Orders',
+          type: 'area',
+          data: trackCounts
+        }
+      ]
+      const updatedOptions = { ...this.chartOptions };
+      this.chartOptions = updatedOptions;
+      this.cdr.detectChanges();
+    }
   }
 }
